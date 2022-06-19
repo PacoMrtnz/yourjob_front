@@ -1,0 +1,113 @@
+<!-- Sección Migas de pan -->
+<section class="migaspan">
+  <nav aria-label="breadcrumb">
+    <ol class="breadcrumb">
+      <span style="margin-left: 10px;"><i class="fas fa-info-circle"></i> Estás navegando en: &nbsp;</span>
+      <li class="breadcrumb-item active" aria-current="page"><a [routerLink]="['/contact']" style="color: rgb(7, 7, 78);" class="linkFooter">Contacto</a></li>
+    </ol>
+  </nav>
+</section>
+
+<!-- Sección Contacto -->
+<!-- <div class="container"> -->
+<section class="contacto login_registro py-4">
+  <div class="container">
+    <div class="row">
+      <div class="col-md-12 m-auto">
+        <div class="well well-sm m-auto">
+          <form (ngSubmit)="tramitarContacto()" [formGroup]="profileForm" ngNativeValidate
+            class="form-horizontal text-center">
+            <fieldset>
+              <!-- <legend class="header" id="contacto" style="border-radius: 50%;">Contáctanos</legend> -->
+              <div class="titulo">
+                <h2 class="colorAzulOscuro">Contáctanos</h2>
+              </div>
+              <!-- <br> -->
+              <p class="text-end fst-italic mt-2 mx-5" style="font-size: 0.9em;"> Los campos marcados con * son obligatorios.</p>
+
+              <div class="col-md-1"></div>
+              <div class="container col-md-10 mt-3">
+                <div class="form-group">
+                  <div class="row m-auto">
+                    <div class="col-md-5 m-auto mt-3">
+                      <label for="fname">
+                        <span class="col-md-1 col-md-offset-2 text-center">* <i class="fa fa-user bigicon"
+                            title="Nombre"></i> Nombre:</span>
+                      </label>
+
+                      <input id="fname" maxlength="50" pattern="[a-zA-ZáéíóúÁÉÍÓÚñÑ ]{2,50}" formControlName="nombre" 
+                      title="Nombre debe ser solamente texto con espacios, mínimo de 2 carácteres y no superior a 50 carácteres" name="name" type="text" placeholder="Nombre"
+                        class="form-control text-center" required>
+                    </div>
+                    <div class="col-md-5 m-auto mt-3">
+                      <label for="lname">
+                        <span class="col-md-1 col-md-offset-2 text-center">* <i class="fa fa-user bigicon"
+                            title="Apellidos"></i> Apellidos:</span>
+                      </label>
+
+                      <input id="lname" maxlength="80" formControlName="apellidos" pattern="[a-zA-ZáéíóúÁÉÍÓÚñÑ ]{2,80}"
+                      title="Apellidos debe ser solamente texto con espacios, mínimo de 2 carácteres y no superior a 80 carácteres" name="apellidos" type="text" placeholder="Apellidos"
+                        class="form-control text-center" required>
+                    </div>
+                  </div>
+
+                </div>
+                <div class="form-group">
+                  <div class="row m-auto">
+                    <div class="col-md-5 m-auto mt-3">
+                      <label for="email">
+                        <span class="col-md-1 col-md-offset-2 text-center">* <i class="fas fa-envelope bigicon"
+                            title="Email"></i> Email:</span>
+                      </label>
+
+
+                      <input id="email" formControlName="email" name="email" type="email" placeholder="Email"
+                        class="form-control text-center" required>
+                    </div>
+                    <div class="col-md-5 m-auto mt-3">
+                      <label for="tlf">
+                        <span class="col-md-1 col-md-offset-2 text-center"><i class="fas fa-phone-square bigicon"
+                            title="Número de teléfono"></i> Teléfono:</span>
+                      </label>
+
+                      <input id="tlf" maxlength="20" formControlName="telefono" name="tlf" type="text"
+                        placeholder="Teléfono (Opcional)" class="form-control text-center">
+                    </div>
+                  </div>
+
+                </div>
+                <div class="form-group">
+                  <div class="col-md-8 m-auto mt-3">
+                    <label for="message">
+                      <span class="col-md-1 col-md-offset-2 text-center">* <i class="fas fa-comment-dots bigicon"
+                          title="Mensaje"></i> Mensaje:</span>
+                    </label>
+
+                    <textarea class="form-control text-center" id="message" formControlName="mensaje" name="message"
+                      placeholder="Ingrese su mensaje para nosotros aquí. Nos comunicaremos con usted en un plazo de 3 días hábiles."
+                      rows="4" required></textarea>
+                  </div>
+                </div>
+                <!-- <p class="text-end mx-5 mt-5"> Los campos marcados con * son obligatorios.</p> -->
+                <div class="form-group mt-5">
+                  <div class="col-md-12 text-center">
+                    <!-- <a href="mailto:yourjob.soporte@gmail.com" id="enlaceMandarMail"> -->
+                    <button type="reset" id="resetearContacto" class="btnEnviar btn-lg mx-3"
+                      title="Resetear formulario"><i class="fas fa-redo"></i> Resetear</button>
+                    <button type="submit" id="enviarContacto" class="btnEnviar btn-lg mx-3"
+                      title="Ir a enviar contacto"><i class="fas fa-share"></i> Enviar</button>
+                    <!-- </a> -->
+                  </div>
+                </div>
+              </div>
+              <div class="col-md-1"></div>
+            </fieldset>
+          </form>
+          <a href="mailto:yourjob.soporte@gmail.com" id="enlaceMandarMail">mail</a>
+
+        </div>
+      </div>
+    </div>
+  </div>
+</section>
+<!-- </div> -->

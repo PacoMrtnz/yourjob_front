@@ -1,0 +1,888 @@
+<!-- Sección Migas de pan -->
+<section class="migaspan">
+    <nav aria-label="breadcrumb">
+      <ol class="breadcrumb">
+        <span style="margin-left: 10px;"><i class="fas fa-info-circle"></i> Estás navegando en: &nbsp;</span>
+        <li class="breadcrumb-item active" aria-current="page"><a [routerLink]="['/profile']" style="color: rgb(7, 7, 78);" class="linkFooter">Perfil de usuario</a></li>
+      </ol>
+    </nav>
+  </section>
+
+<!-- Sección Profile -->
+<section class="login_registro py-4">
+    <div class="container">
+        <div class="row">
+            <div class="col-md-12 m-auto">
+                <div class="well well-sm">
+                    <div id="profile">
+                        <div id="profileDiv" class="container profile" style="display: none;">
+                            <div class="main-body" *ngIf="profilesService.profile as perfil">
+                                <div class="row gutters-sm">
+                                    <div class="col-md-4 mb-3">
+                                        <div class="card">
+                                            <div class="card-body">
+                                                <div class="d-flex flex-column align-items-center text-center">
+                                                    <img id="avatarUrl" [src]="perfil.avatar" class="rounded-circle"
+                                                        width="150">
+                                                    <div class="mt-3">
+                                                        <h4 id="usernameTitle"><i
+                                                                class="fas fa-at"></i>{{perfil.account.username}}
+                                                        </h4>
+                                                        <button type="button" class="btnEnviar col-md-12 mt-3 btn-lg"
+                                                            title="Editar usuario" data-bs-toggle="modal"
+                                                            data-bs-target="#updateUserModal"><i
+                                                                class="fas fa-user-edit"></i> Editar</button>
+
+                                                        <div class="modal fade" id="updateUserModal"
+                                                            data-bs-backdrop="static" data-bs-keyboard="false"
+                                                            tabindex="-1" aria-labelledby="updateUserModalLabel"
+                                                            aria-hidden="true">
+                                                            <div class="modal-dialog modal-lg">
+                                                                <div class="modal-content">
+                                                                    <div class="modal-header">
+                                                                        <h5 class="modal-title fs-4"
+                                                                            id="updateUserModalLabel">
+                                                                            Editar usuario
+                                                                        </h5> <button id="closeModalUpdateUser"
+                                                                            type="button" class="btn-close"
+                                                                            (click)="loadData()" data-bs-dismiss="modal"
+                                                                            aria-label="Close"
+                                                                            title="Cerrar ventana"></button>
+                                                                    </div>
+                                                                    <div class="modal-body">
+                                                                        <form #updateUserForm="ngForm"
+                                                                            (ngSubmit)="updateUser(updateUserForm)"
+                                                                            ngNativeValidate
+                                                                            class="form-horizontal text-center"
+                                                                            method="post">
+                                                                            <fieldset>
+                                                                                <p class="enlaceAzul">Modifique los
+                                                                                    datos
+                                                                                    a continuación:
+                                                                                </p>
+                                                                                <div class="col-md-1"></div>
+                                                                                <div class="container col-md-10">
+                                                                                    <div class="form-group">
+                                                                                        <div class="row">
+                                                                                            <input type="hidden"
+                                                                                                name="usernameOld"
+                                                                                                value="{{profilesService.profile.account.username}}">
+                                                                                            <input type="hidden"
+                                                                                                name="_id"
+                                                                                                [(ngModel)]="profilesService.updatedUser._id">
+                                                                                            <div
+                                                                                                class="col-md-5 m-auto mt-3">
+                                                                                                <label
+                                                                                                    for="nombreUsuario">
+                                                                                                    <span
+                                                                                                        class="col-md-1 col-md-offset-2 text-center">*
+                                                                                                        <i class="fas fa-user bigicon"
+                                                                                                            title="Nombre de usuario"></i>
+                                                                                                        Nombre de
+                                                                                                        usuario</span>
+                                                                                                </label>
+
+                                                                                                <input
+                                                                                                    [(ngModel)]="profilesService.updatedUser.username"
+                                                                                                    id="nombreUsuario"
+                                                                                                    name="username"
+                                                                                                    maxlength="20"
+                                                                                                    pattern="[A-Za-z0-9áéíóúÁÉÍÓÚñÑ_-]{2,20}"
+                                                                                                    title="Nombre de usuario no debe ser vacío ni acepta espacios. Además debe tener como mínimo 2 carácteres y máximo 20 carácteres. Acepta tildes y '_' '-'"
+                                                                                                    type="text"
+                                                                                                    placeholder="Nombre de usuario"
+                                                                                                    class="form-control text-center"
+                                                                                                    required>
+                                                                                            </div>
+                                                                                            <div
+                                                                                                class="col-md-5 m-auto mt-3">
+                                                                                                <label for="email">
+                                                                                                    <span
+                                                                                                        class="col-md-1 col-md-offset-2 text-center">*
+                                                                                                        <i class="fas fa-envelope bigicon"
+                                                                                                            title="Email"></i>
+                                                                                                        Email</span>
+                                                                                                </label>
+
+                                                                                                <input
+                                                                                                    [(ngModel)]="profilesService.updatedUser.email"
+                                                                                                    id="email"
+                                                                                                    name="email"
+                                                                                                    type="email"
+                                                                                                    placeholder="Email"
+                                                                                                    class="form-control text-center"
+                                                                                                    required>
+                                                                                            </div>
+                                                                                        </div>
+                                                                                    </div>
+                                                                                    
+                                                                                    <div class="form-group">
+                                                                                        <div class="row">
+                                                                                            <div class="col-md-3"></div>
+                                                                                            <div
+                                                                                                class="col-md-6 m-auto mt-3">
+                                                                                                <label
+                                                                                                    for="accountType">
+                                                                                                    <span
+                                                                                                        class="col-md-1 col-md-offset-2 text-center">*
+                                                                                                        <i class="fas fa-user-circle bigicon"
+                                                                                                            title="Tipo de cuenta">&nbsp;</i>
+                                                                                                        Tipo de cuenta:
+                                                                                                    </span>
+                                                                                                </label>
+
+                                                                                                <div class="row">
+                                                                                                    <div
+                                                                                                        class="col-md-3">
+                                                                                                    </div>
+                                                                                                    <div
+                                                                                                        class="col-md-6 m-2">
+                                                                                                        <!-- <div
+                                                                                                            class="row"> -->
+                                                                                                        <!-- <div
+                                                                                                            class="col-md-5"> -->
+                                                                                                        <div
+                                                                                                            *ngIf="profilesService.updatedUser.accountType === 'admin'">
+                                                                                                            <div
+                                                                                                                class="form-check">
+                                                                                                                <input
+                                                                                                                    [(ngModel)]="profilesService.updatedUser.accountType"
+                                                                                                                    [value]="admin"
+                                                                                                                    name="accountType"
+                                                                                                                    class="form-check-input"
+                                                                                                                    type="radio"
+                                                                                                                    id="accountTypeAdmin"
+                                                                                                                    checked
+                                                                                                                    required>
+                                                                                                                Admin
+                                                                                                            </div>
+                                                                                                        </div>
+                                                                                                        <div
+                                                                                                            class="form-check">
+                                                                                                            <input
+                                                                                                                [(ngModel)]="profilesService.updatedUser.accountType"
+                                                                                                                [value]="user"
+                                                                                                                name="accountType"
+                                                                                                                class="form-check-input"
+                                                                                                                type="radio"
+                                                                                                                id="accountTypeUser"
+                                                                                                                checked
+                                                                                                                required>
+                                                                                                            Usuario
+                                                                                                        </div>
+                                                                                                        <!-- </div> -->
+                                                                                                        <!-- <div
+                                                                                                            class="col-md-5"> -->
+                                                                                                        <div
+                                                                                                            class="form-check">
+                                                                                                            <input
+                                                                                                                [(ngModel)]="profilesService.updatedUser.accountType"
+                                                                                                                [value]="company"
+                                                                                                                name="accountType"
+                                                                                                                class="form-check-input"
+                                                                                                                type="radio"
+                                                                                                                id="accountTypeCompany"
+                                                                                                                required>
+                                                                                                            Empresa
+                                                                                                        </div>
+                                                                                                        <!-- </div> -->
+                                                                                                        <!-- </div> -->
+                                                                                                    </div>
+                                                                                                    <div
+                                                                                                        class="col-md-3">
+                                                                                                    </div>
+                                                                                                </div>
+
+                                                                                            </div>
+                                                                                            <div class="col-md-3"></div>
+                                                                                        </div>
+                                                                                    </div>
+                                                                                    <div class="form-group mt-3">
+                                                                                        <div
+                                                                                            class="col-md-12 text-center">
+                                                                                            <button type="submit"
+                                                                                                class="btnEnviar btn-lg col-md-6"
+                                                                                                title="Actualizar usuario"><i
+                                                                                                    class="fas fa-user-edit"></i>
+                                                                                                Actualizar</button>
+                                                                                        </div>
+                                                                                    </div>
+                                                                                </div>
+                                                                                <div class="col-md-1"></div>
+                                                                            </fieldset>
+                                                                        </form>
+
+                                                                        <div id="notificationUpdateUser"
+                                                                            class="text-center col-md-12">
+
+                                                                        </div>
+                                                                    </div>
+                                                                    <div class="modal-footer text-left">
+                                                                        <p class="footer-title text-end fst-italic mt-2 mx-5"
+                                                                            style="font-size: 0.9em;">
+                                                                            Los campos marcados con * son obligatorios.
+                                                                        </p>
+
+                                                                        <button class="btnEnviar col-md-12 mt-3 btn-lg"
+                                                                            title="Ir a Editar Avatar"
+                                                                            data-bs-target="#updateUserModal2"
+                                                                            data-bs-toggle="modal"><i
+                                                                                class="fas fa-image"></i> Editar
+                                                                            avatar</button>
+                                                                    </div>
+                                                                </div>
+                                                            </div>
+                                                        </div>
+                                                        <div class="modal fade" id="updateUserModal2"
+                                                            data-bs-backdrop="static" data-bs-keyboard="false"
+                                                            tabindex="-1" aria-labelledby="updateUserModalLabel2"
+                                                            aria-hidden="true">
+                                                            <div class="modal-dialog">
+                                                                <div class="modal-content">
+                                                                    <div class="modal-header">
+                                                                        <h5 class="modal-title fs-4"
+                                                                            id="updateUserModalLabel2">
+                                                                            Editar avatar
+                                                                        </h5> <button id="closeModalUpdateAvatar"
+                                                                            type="button" class="btn-close"
+                                                                            (click)="loadData()" data-bs-dismiss="modal"
+                                                                            aria-label="Close"
+                                                                            title="Cerrar ventana"></button>
+                                                                    </div>
+                                                                    <div class="modal-body">
+                                                                        <form id="updateAvatarForm"
+                                                                            [formGroup]="updateAvatarForm"
+                                                                            (ngSubmit)="updateAvatar()" ngNativeValidate
+                                                                            class="form-horizontal text-center"
+                                                                            method="post" enctype="multipart/form-data">
+                                                                            <p class="body-desc">Puedes subir el
+                                                                                avatar en formato JPEG, PNG o GIF.</p>
+                                                                            <div class="photo-input mt-3">
+                                                                                <input type="file" class="text-center"
+                                                                                    id="loadAvatar"
+                                                                                    (change)="onFileSelect($event)"
+                                                                                    accept="image/jpeg, image/gif, image/png"
+                                                                                    required />
+                                                                                <br>
+                                                                                <button type="submit" id="sendAvatar"
+                                                                                    class="btnEnviar btn-lg m-4 p-3 col-md-4"
+                                                                                    title="Enviar Avatar">
+                                                                                    <i class="fas fa-file-import"></i>
+                                                                                    Enviar
+                                                                                </button>
+                                                                            </div>
+                                                                        </form>
+
+                                                                        <div id="notificationUpdateAvatar"
+                                                                            class="text-center col-md-12">
+
+                                                                        </div>
+                                                                    </div>
+                                                                    <div class="modal-footer">
+                                                                        <p class="footer-title text-end fst-italic mt-2 mx-5"
+                                                                            style="font-size: 0.9em;">
+                                                                            Si hay problemas, intente
+                                                                            subir un archivo más pequeño.
+                                                                        </p>
+                                                                        <button class="btnEnviar col-md-12 mt-3 btn-lg"
+                                                                            title="Ir a Editar Usuario"
+                                                                            data-bs-target="#updateUserModal"
+                                                                            data-bs-toggle="modal"><i
+                                                                                class="fas fa-user-edit"></i> Editar
+                                                                            usuario</button>
+                                                                    </div>
+                                                                </div>
+                                                            </div>
+                                                        </div>
+                                                    </div>
+                                                </div>
+                                            </div>
+                                        </div>
+                                        <div class="card mt-3">
+                                            <ul class="list-group list-group-flush">
+                                                <li
+                                                    class="list-group-item d-flex justify-content-between align-items-center flex-wrap prueba">
+                                                    <h6 class="mb-0"><svg xmlns="http://www.w3.org/2000/svg" width="24"
+                                                            height="24" viewBox="0 0 24 24" fill="none"
+                                                            stroke="currentColor" stroke-width="2"
+                                                            stroke-linecap="round" stroke-linejoin="round"
+                                                            class="feather feather-globe mr-2 icon-inline text-primary">
+                                                            <circle cx="12" cy="12" r="10"></circle>
+                                                            <line x1="2" y1="12" x2="22" y2="12"></line>
+                                                            <path
+                                                                d="M12 2a15.3 15.3 0 0 1 4 10 15.3 15.3 0 0 1-4 10 15.3 15.3 0 0 1-4-10 15.3 15.3 0 0 1 4-10z">
+                                                            </path>
+                                                        </svg> <span class="text-dark"> Website</span></h6>
+                                                    <span class="text-secondary"
+                                                        id="website">{{perfil.social.website}}</span>
+                                                </li>
+                                                <li
+                                                    class="list-group-item d-flex justify-content-between align-items-center flex-wrap">
+                                                    <h6 class="mb-0"><svg xmlns="http://www.w3.org/2000/svg" width="24"
+                                                            height="24" viewBox="0 0 24 24" fill="none"
+                                                            stroke="currentColor" stroke-width="2"
+                                                            stroke-linecap="round" stroke-linejoin="round"
+                                                            class="feather feather-github mr-2 icon-inline text-dark">
+                                                            <path
+                                                                d="M9 19c-5 1.5-5-2.5-7-3m14 6v-3.87a3.37 3.37 0 0 0-.94-2.61c3.14-.35 6.44-1.54 6.44-7A5.44 5.44 0 0 0 20 4.77 5.07 5.07 0 0 0 19.91 1S18.73.65 16 2.48a13.38 13.38 0 0 0-7 0C6.27.65 5.09 1 5.09 1A5.07 5.07 0 0 0 5 4.77a5.44 5.44 0 0 0-1.5 3.78c0 5.42 3.3 6.61 6.44 7A3.37 3.37 0 0 0 9 18.13V22">
+                                                            </path>
+                                                        </svg> <span class="text-dark"> Github</span></h6>
+                                                    <span class="text-secondary"
+                                                        id="github">@{{perfil.social.github}}</span>
+                                                </li>
+                                                <li
+                                                    class="list-group-item d-flex justify-content-between align-items-center flex-wrap">
+                                                    <h6 class="mb-0"><svg xmlns="http://www.w3.org/2000/svg" width="24"
+                                                            height="24" viewBox="0 0 24 24" fill="none"
+                                                            stroke="currentColor" stroke-width="2"
+                                                            stroke-linecap="round" stroke-linejoin="round"
+                                                            class="feather feather-twitter mr-2 icon-inline text-info">
+                                                            <path
+                                                                d="M23 3a10.9 10.9 0 0 1-3.14 1.53 4.48 4.48 0 0 0-7.86 3v1A10.66 10.66 0 0 1 3 4s-4 9 5 13a11.64 11.64 0 0 1-7 2c9 5 20 0 20-11.5a4.5 4.5 0 0 0-.08-.83A7.72 7.72 0 0 0 23 3z">
+                                                            </path>
+                                                        </svg> <span class="text-dark"> Twitter</span></h6>
+                                                    <span class="text-secondary"
+                                                        id="twitter">@{{perfil.social.twitter}}</span>
+                                                </li>
+                                                <li
+                                                    class="list-group-item d-flex justify-content-between align-items-center flex-wrap">
+                                                    <h6 class="mb-0"><svg xmlns="http://www.w3.org/2000/svg" width="24"
+                                                            height="24" viewBox="0 0 24 24" fill="none"
+                                                            stroke="currentColor" stroke-width="2"
+                                                            stroke-linecap="round" stroke-linejoin="round"
+                                                            class="feather feather-instagram mr-2 icon-inline text-danger">
+                                                            <rect x="2" y="2" width="20" height="20" rx="5" ry="5">
+                                                            </rect>
+                                                            <path d="M16 11.37A4 4 0 1 1 12.63 8 4 4 0 0 1 16 11.37z">
+                                                            </path>
+                                                            <line x1="17.5" y1="6.5" x2="17.51" y2="6.5"></line>
+                                                        </svg> <span class="text-dark"> Instagram</span></h6>
+                                                    <span class="text-secondary"
+                                                        id="instragram">@{{perfil.social.instagram}}</span>
+                                                </li>
+                                            </ul>
+                                            <div class="d-flex flex-column align-items-center mb-3">
+                                                <button type="button" class="btnEnviar col-md-6 mt-3 btn-lg"
+                                                    title="Editar redes sociales" data-bs-toggle="modal"
+                                                    data-bs-target="#updateRRSSModal"><i class="fas fa-edit"></i>
+                                                    Editar
+                                                </button>
+                                            </div>
+                                            <div class="modal fade" id="updateRRSSModal" data-bs-backdrop="static"
+                                                data-bs-keyboard="false" tabindex="-1"
+                                                aria-labelledby="updateRRSSModalLabel2" aria-hidden="true">
+                                                <div class="modal-dialog">
+                                                    <div class="modal-content">
+                                                        <div class="modal-header">
+                                                            <h5 class="modal-title fs-4" id="updateRRSSModalLabel2">
+                                                                Editar redes sociales
+                                                            </h5> <button id="closeModalUpdateRRSS" type="button"
+                                                                class="btn-close" (click)="loadData()"
+                                                                data-bs-dismiss="modal" aria-label="Close"
+                                                                title="Cerrar ventana"></button>
+                                                        </div>
+                                                        <div class="modal-body">
+                                                            <form id="updateRRSSForm" #updateRRSSForm="ngForm"
+                                                                (ngSubmit)="updateRRSS(updateRRSSForm)" ngNativeValidate
+                                                                class="form-horizontal text-center" method="post">
+
+                                                                <ul class="list-group list-group-flush">
+                                                                    <li
+                                                                        class="list-group-item d-flex justify-content-between align-items-center flex-wrap prueba">
+
+                                                                        <h6 class="mb-0"><svg
+                                                                                xmlns="http://www.w3.org/2000/svg"
+                                                                                width="24" height="24"
+                                                                                viewBox="0 0 24 24" fill="none"
+                                                                                stroke="currentColor" stroke-width="2"
+                                                                                stroke-linecap="round"
+                                                                                stroke-linejoin="round"
+                                                                                class="feather feather-globe mr-2 icon-inline text-primary">
+                                                                                <circle cx="12" cy="12" r="10">
+                                                                                </circle>
+                                                                                <line x1="2" y1="12" x2="22" y2="12">
+                                                                                </line>
+                                                                                <path
+                                                                                    d="M12 2a15.3 15.3 0 0 1 4 10 15.3 15.3 0 0 1-4 10 15.3 15.3 0 0 1-4-10 15.3 15.3 0 0 1 4-10z">
+                                                                                </path>
+                                                                            </svg>
+                                                                            <span class="text-dark">
+                                                                                Website</span>
+
+                                                                        </h6>
+
+
+
+                                                                        <span class="text-secondary" id="website">
+                                                                            <input
+                                                                                value="{{profilesService.updatedRRSS.website}}"
+                                                                                [(ngModel)]="profilesService.updatedRRSS.website"
+                                                                                maxlength="40"
+                                                                                title="Máximo 40 carácteres"
+                                                                                id="website" name="website" type="text"
+                                                                                placeholder="Website"
+                                                                                class="form-control text-center">
+                                                                            <!-- <input type="text"
+                                                                                value="{{perfil.social.website}}"> -->
+                                                                            <!-- {{perfil.social.website}} -->
+                                                                        </span>
+                                                                    </li>
+                                                                    <li
+                                                                        class="list-group-item d-flex justify-content-between align-items-center flex-wrap">
+                                                                        <h6 class="mb-0"><svg
+                                                                                xmlns="http://www.w3.org/2000/svg"
+                                                                                width="24" height="24"
+                                                                                viewBox="0 0 24 24" fill="none"
+                                                                                stroke="currentColor" stroke-width="2"
+                                                                                stroke-linecap="round"
+                                                                                stroke-linejoin="round"
+                                                                                class="feather feather-github mr-2 icon-inline text-dark">
+                                                                                <path
+                                                                                    d="M9 19c-5 1.5-5-2.5-7-3m14 6v-3.87a3.37 3.37 0 0 0-.94-2.61c3.14-.35 6.44-1.54 6.44-7A5.44 5.44 0 0 0 20 4.77 5.07 5.07 0 0 0 19.91 1S18.73.65 16 2.48a13.38 13.38 0 0 0-7 0C6.27.65 5.09 1 5.09 1A5.07 5.07 0 0 0 5 4.77a5.44 5.44 0 0 0-1.5 3.78c0 5.42 3.3 6.61 6.44 7A3.37 3.37 0 0 0 9 18.13V22">
+                                                                                </path>
+                                                                            </svg> <span class="text-dark">
+                                                                                Github</span></h6>
+                                                                        <span class="text-secondary" id="github">
+                                                                            <input
+                                                                                [(ngModel)]="profilesService.updatedRRSS.github"
+                                                                                id="github"
+                                                                                maxlength="25"
+                                                                                title="Máximo 25 carácteres" name="github" type="text"
+                                                                                placeholder="Github"
+                                                                                class="form-control text-center">
+                                                                            <!-- <input type="text"
+                                                                                value="{{perfil.social.github}}"> -->
+                                                                            <!-- {{perfil.social.github}} -->
+                                                                        </span>
+                                                                    </li>
+                                                                    <li
+                                                                        class="list-group-item d-flex justify-content-between align-items-center flex-wrap">
+                                                                        <h6 class="mb-0"><svg
+                                                                                xmlns="http://www.w3.org/2000/svg"
+                                                                                width="24" height="24"
+                                                                                viewBox="0 0 24 24" fill="none"
+                                                                                stroke="currentColor" stroke-width="2"
+                                                                                stroke-linecap="round"
+                                                                                stroke-linejoin="round"
+                                                                                class="feather feather-twitter mr-2 icon-inline text-info">
+                                                                                <path
+                                                                                    d="M23 3a10.9 10.9 0 0 1-3.14 1.53 4.48 4.48 0 0 0-7.86 3v1A10.66 10.66 0 0 1 3 4s-4 9 5 13a11.64 11.64 0 0 1-7 2c9 5 20 0 20-11.5a4.5 4.5 0 0 0-.08-.83A7.72 7.72 0 0 0 23 3z">
+                                                                                </path>
+                                                                            </svg>
+                                                                            <span class="text-dark">
+                                                                                Twitter</span>
+                                                                        </h6>
+                                                                        <span class="text-secondary" id="twitter">
+                                                                            <input
+                                                                                [(ngModel)]="profilesService.updatedRRSS.twitter"
+                                                                                id="twitter"
+                                                                                maxlength="25"
+                                                                                title="Máximo 25 carácteres" name="twitter" type="text"
+                                                                                placeholder="Twitter"
+                                                                                class="form-control text-center">
+                                                                            <!-- <input type="text"
+                                                                                value="{{perfil.social.twitter}}"> -->
+                                                                            <!-- {{perfil.social.twitter}} -->
+                                                                        </span>
+                                                                    </li>
+                                                                    <li
+                                                                        class="list-group-item d-flex justify-content-between align-items-center flex-wrap">
+                                                                        <h6 class="mb-0"><svg
+                                                                                xmlns="http://www.w3.org/2000/svg"
+                                                                                width="24" height="24"
+                                                                                viewBox="0 0 24 24" fill="none"
+                                                                                stroke="currentColor" stroke-width="2"
+                                                                                stroke-linecap="round"
+                                                                                stroke-linejoin="round"
+                                                                                class="feather feather-instagram mr-2 icon-inline text-danger">
+                                                                                <rect x="2" y="2" width="20" height="20"
+                                                                                    rx="5" ry="5">
+                                                                                </rect>
+                                                                                <path
+                                                                                    d="M16 11.37A4 4 0 1 1 12.63 8 4 4 0 0 1 16 11.37z">
+                                                                                </path>
+                                                                                <line x1="17.5" y1="6.5" x2="17.51"
+                                                                                    y2="6.5"></line>
+                                                                            </svg> <span class="text-dark">
+                                                                                Instagram</span></h6>
+                                                                        <span class="text-secondary" id="instragram">
+                                                                            <input
+                                                                                [(ngModel)]="profilesService.updatedRRSS.instagram"
+                                                                                id="instagram" name="instagram"
+                                                                                type="text"
+                                                                                maxlength="25"
+                                                                                title="Máximo 25 carácteres" placeholder="Instagram"
+                                                                                class="form-control text-center">
+                                                                            
+                                                                        </span>
+                                                                    </li>
+                                                                </ul>
+                                                                <div class="form-group mt-4">
+                                                                    <div class="col-md-12 text-center">
+                                                                        <button type="submit"
+                                                                            class="btnEnviar btn-lg col-md-6"
+                                                                            title="Actualizar redes sociales"><i
+                                                                                class="fas fa-edit"></i>
+                                                                            Actualizar</button>
+                                                                    </div>
+                                                                </div>
+                                                            </form>
+
+                                                            <div id="notificationUpdateRRSS"
+                                                                class="text-center col-md-12">
+
+                                                            </div>
+                                                        </div>
+                                                        <div class="modal-footer">
+                                                            <p class="footer-title text-end fst-italic mt-2 mx-5"
+                                                                style="font-size: 0.9em;">
+                                                                Los campos pueden dejarse vacíos.
+                                                            </p>
+
+                                                            <button class="btnEnviar col-md-12 mt-3 btn-lg"
+                                                                title="Ir a Editar Usuario"
+                                                                data-bs-target="#updateUserModal"
+                                                                data-bs-toggle="modal"><i class="fas fa-user-edit"></i>
+                                                                Editar
+                                                                usuario</button>
+                                                        </div>
+                                                    </div>
+                                                </div>
+                                            </div>
+                                        </div>
+                                    </div>
+
+                                    <div class="col-md-8">
+                                        <div class="row gutters-sm">
+                                            <div class="col-sm-1"></div>
+                                            <div class="card mb-3 col-sm-10">
+                                                <div class="card-body text-center">
+                                                    <h5 class="text-center mb-4"><i
+                                                            class="material-icons colorAzulOscuro mr-2 bigicon"><i
+                                                                class="fas fa-user" title="Datos de la cuenta"></i>
+                                                            Datos de la cuenta</i></h5>
+                                                    <div class="row d-none">
+                                                        <div class="col-sm-5">
+                                                            <h6 class="mb-0">ID de usuario</h6>
+                                                        </div>
+                                                        <div id="accountId" class="col-sm-7 text-secondary">
+                                                            {{perfil.account._id}}
+                                                        </div>
+                                                    </div>
+                                                    <div class="row">
+                                                        <div class="col-sm-5">
+                                                            <h6 class="mb-0"><i class="fas fa-at colorAzulOscuro"
+                                                                    title="Nombre de usuario"></i>
+                                                                Nombre de usuario:</h6>
+                                                        </div>
+                                                        <div id="username" class="col-sm-7 text-secondary">
+                                                            {{perfil.account.username}}
+                                                        </div>
+                                                    </div>
+                                                    <hr>
+                                                    <div class="row">
+                                                        <div class="col-sm-5">
+                                                            <h6 class="mb-0"><i class="fas fa-envelope colorAzulOscuro"
+                                                                    title="Email"></i> Email:
+                                                            </h6>
+                                                        </div>
+                                                        <div id="email" class="col-sm-7 text-secondary">
+                                                            {{perfil.account.email}}
+                                                        </div>
+                                                    </div>
+                                                    <hr>
+                                                    <div class="row">
+                                                        <div class="col-sm-5">
+                                                            <h6 class="mb-0"><i class="fas fa-user-plus colorAzulOscuro"
+                                                                    title="Creado"></i> Creado:
+                                                            </h6>
+                                                        </div>
+                                                        <div id="creado" class="col-sm-7 text-secondary">
+                                                            {{profilesService.updatedUser.createdAt |
+                                                            date:'mediumDate'}}
+                                                        </div>
+                                                    </div>
+                                                    <hr>
+                                                    <div class="row">
+                                                        <div class="col-sm-5">
+                                                            <h6 class="mb-0"><i class="fas fa-user-edit colorAzulOscuro"
+                                                                    title="Editado"></i> Editado:
+                                                            </h6>
+                                                        </div>
+                                                        <div id="editado" class="col-sm-7 text-secondary">
+                                                            {{profilesService.updatedUser.updatedAt |
+                                                            date:'mediumDate'}}
+                                                        </div>
+                                                    </div>
+                                                    <!-- <hr>
+                                                    <div class="row">
+                                                        <div class="col-sm-5">
+                                                            <h6 class="mb-0"><i
+                                                                    class="fas fa-envelope colorAzulOscuro" title="Última actualización"></i> Actualizado:
+                                                            </h6>
+                                                        </div>
+                                                        <div id="email" class="col-sm-7 text-secondary">
+                                                            {{profilesService.updatedUser.updatedAt}}
+                                                        </div>
+                                                    </div> -->
+                                                    <div
+                                                        class="row d-flex flex-column align-items-center text-center mt-3">
+                                                        <button type="button" class="btnEnviar col-md-9 mt-3 btn-lg"
+                                                            title="Cambiar contraseña" data-bs-toggle="modal"
+                                                            data-bs-target="#updatePasswordModal"><i
+                                                                class="fas fa-key"></i> Cambiar contraseña</button>
+                                                    </div>
+                                                    <div class="modal fade" id="updatePasswordModal"
+                                                        data-bs-backdrop="static" data-bs-keyboard="false" tabindex="-1"
+                                                        aria-labelledby="updatePasswordModalLabel" aria-hidden="true">
+                                                        <div class="modal-dialog modal-lg">
+                                                            <div class="modal-content">
+                                                                <div class="modal-header">
+                                                                    <h5 class="modal-title fs-4"
+                                                                        id="updatePasswordModalLabel">
+                                                                        Cambiar contraseña
+                                                                    </h5> <button id="closeModalUpdatePassword"
+                                                                        type="button" class="btn-close"
+                                                                        (click)="loadData()" data-bs-dismiss="modal"
+                                                                        aria-label="Close"
+                                                                        title="Cerrar ventana"></button>
+                                                                </div>
+                                                                <div class="modal-body">
+                                                                    <form #updatePasswordForm="ngForm"
+                                                                        (ngSubmit)="updatePassword(updatePasswordForm)"
+                                                                        ngNativeValidate
+                                                                        class="form-horizontal text-center"
+                                                                        method="post">
+                                                                        <fieldset>
+                                                                            <p class="enlaceAzul">Indique la nueva
+                                                                                contraseña a continuación:
+                                                                            </p>
+                                                                            <div class="col-md-1"></div>
+                                                                            <div class="container col-md-10">
+                                                                                <div class="form-group">
+                                                                                    <div class="row">
+                                                                                        <div
+                                                                                            class="col-md-5 m-auto mt-3">
+
+
+                                                                                            <input
+                                                                                                [(ngModel)]="profilesService.updatedPassword._id"
+                                                                                                type="hidden" id="_id"
+                                                                                                name="_id" type="text"
+                                                                                                style="display: none;"
+                                                                                                required>
+
+                                                                                            <input
+                                                                                                [(ngModel)]="profilesService.updatedPassword.lastPassword"
+                                                                                                type="hidden"
+                                                                                                id="lastPassword"
+                                                                                                name="lastPassword"
+                                                                                                type="password"
+                                                                                                style="display: none;"
+                                                                                                required>
+
+                                                                                            <label for="password">
+                                                                                                <span
+                                                                                                    class="col-md-1 col-md-offset-2 text-center">*
+                                                                                                    <i class="fas fa-key bigicon"
+                                                                                                        title="Nueva contraseña"></i>
+                                                                                                    Nueva
+                                                                                                    contraseña:</span>
+                                                                                            </label>
+
+                                                                                            <input
+                                                                                                [(ngModel)]="profilesService.updatedPassword.password"
+                                                                                                id="password"
+                                                                                                name="password"
+                                                                                                type="password"
+                                                                                                maxlength="255"
+                                                                                                title="Contraseña debe tener mínimo 6 carácteres y no espacios en blanco"
+                                                                                                placeholder="Nueva contraseña"
+                                                                                                class="form-control text-center"
+                                                                                                required>
+                                                                                        </div>
+                                                                                        <div
+                                                                                            class="col-md-5 m-auto mt-3">
+                                                                                            <label
+                                                                                                for="confirmPassword">
+                                                                                                <span
+                                                                                                    class="col-md-1 col-md-offset-2 text-center">*
+                                                                                                    <i class="fas fa-key bigicon"
+                                                                                                        title="Confirmar contraseña"></i>
+                                                                                                    Confirmar
+                                                                                                    contraseña</span>
+                                                                                            </label>
+
+                                                                                            <input
+                                                                                                [(ngModel)]="profilesService.updatedPassword.confirmPassword"
+                                                                                                id="confirmPassword"
+                                                                                                name="confirmPassword"
+                                                                                                type="password"
+                                                                                                maxlength="255"
+                                                                                                title="Contraseña debe tener mínimo 6 carácteres y no espacios en blanco"
+                                                                                                placeholder="Confirmar contraseña"
+                                                                                                class="form-control text-center"
+                                                                                                required>
+                                                                                        </div>
+                                                                                    </div>
+                                                                                </div>
+
+                                                                                <br>
+
+                                                                                <div class="form-group mt-3">
+                                                                                    <div class="col-md-12 text-center">
+                                                                                        <button type="submit"
+                                                                                            class="btnEnviar btn-lg col-md-6"
+                                                                                            title="Cambiar contraseña"><i
+                                                                                                class="fas fa-key"></i>
+                                                                                            Cambiar</button>
+                                                                                    </div>
+                                                                                </div>
+                                                                            </div>
+                                                                            <div class="col-md-1"></div>
+                                                                        </fieldset>
+                                                                    </form>
+
+                                                                    <div id="notificationUpdatePassword"
+                                                                        class="text-center col-md-12">
+
+                                                                    </div>
+                                                                </div>
+                                                                <div class="modal-footer">
+                                                                    <p class="footer-title text-end fst-italic mt-2 mx-5"
+                                                                        style="font-size: 0.9em;">
+                                                                        Los campos marcados con * son obligatorios.
+                                                                    </p>
+                                                                    <!-- <p class="footer-title">
+                                                                        Los campos no pueden ser vacíos.</p> -->
+                                                                    <button class="btnEnviar col-md-12 mt-3 btn-lg"
+                                                                        title="Ir a Editar Usuario"
+                                                                        data-bs-target="#updateUserModal"
+                                                                        data-bs-toggle="modal"><i
+                                                                            class="fas fa-user-edit"></i> Editar
+                                                                        usuario</button>
+                                                                </div>
+                                                            </div>
+                                                        </div>
+                                                    </div>
+
+
+                                                </div>
+                                            </div>
+                                            <div class="col-sm-1"></div>
+                                        </div>
+                                        <div class="row gutters-sm mt-1">
+                                            <div class="col-sm-1"></div>
+                                            <div class="col-sm-10 mb-3">
+                                                <div class="card h-100">
+                                                    <div id="curriculum" class="card-body text-center">
+                                                        <h6 class="text-center mb-3"><i
+                                                                class="material-icons colorAzulOscuro mr-2 bigicon"><i
+                                                                    class="fas fa-file-pdf"
+                                                                    title="Currículum Vitae"></i> Currículum Vitae</i>
+                                                        </h6>
+                                                        <small class="text-center">Descargue o suba su currículum vitae
+                                                            a continuación:</small>
+                                                        <div class="col-md-12 text-center mt-2">
+                                                            <button type="button" id="updateCV"
+                                                                class="btnEnviar btn-lg m-3 col-md-4"
+                                                                title="Subir Currículum Vitae" data-bs-toggle="modal"
+                                                                data-bs-target="#uploadCVModal"><i
+                                                                    class="fas fa-file-upload"></i> Subir</button>
+                                                            <div class="modal fade" id="uploadCVModal"
+                                                                data-bs-backdrop="static" data-bs-keyboard="false"
+                                                                tabindex="-1" aria-labelledby="uploadCVModalLabel"
+                                                                aria-hidden="true">
+                                                                <div class="modal-dialog">
+                                                                    <div class="modal-content">
+                                                                        <div class="modal-header">
+                                                                            <h5 class="modal-title fs-4"
+                                                                                id="uploadCVModalLabel">
+                                                                                Suba o actualice su currículum vitae
+                                                                            </h5> <button id="closeModalCV"
+                                                                                type="button" (click)="loadData()"
+                                                                                class="btn-close"
+                                                                                data-bs-dismiss="modal"
+                                                                                aria-label="Close"
+                                                                                title="Cerrar ventana"></button>
+                                                                        </div>
+                                                                        <div class="modal-body">
+                                                                            <form id="updateCVForm"
+                                                                                [formGroup]="updateCVForm"
+                                                                                (ngSubmit)="sendCV()" ngNativeValidate
+                                                                                class="form-horizontal text-center"
+                                                                                method="post"
+                                                                                enctype="multipart/form-data">
+                                                                                <p class="body-desc">Puedes subir el
+                                                                                    currículum en formato JPEG, PNG o
+                                                                                    PDF.</p>
+                                                                                <div class="photo-input mt-3">
+                                                                                    <input type="file"
+                                                                                        class="text-center"
+                                                                                        id="loadFile"
+                                                                                        (change)="onFileSelect($event)"
+                                                                                        accept="image/png, image/jpeg, application/pdf"
+                                                                                        required />
+                                                                                    <br>
+                                                                                    <button type="submit" id="sendCV"
+                                                                                        class="btnEnviar btn-lg m-4 p-3 col-md-4"
+                                                                                        title="Enviar Currículum Vitae">
+                                                                                        <i
+                                                                                            class="fas fa-file-import"></i>
+                                                                                        Enviar
+                                                                                    </button>
+                                                                                </div>
+                                                                            </form>
+
+                                                                            <div id="notificacionLoadCV"
+                                                                                class="text-center col-md-12">
+
+                                                                            </div>
+                                                                        </div>
+                                                                        <div class="modal-footer">
+                                                                            <p class="footer-title text-end fst-italic mt-2 mx-5"
+                                                                                style="font-size: 0.9em;">
+                                                                                Si hay problemas, intente
+                                                                                subir un archivo más pequeño.
+                                                                            </p>
+
+                                                                        </div>
+                                                                    </div>
+                                                                </div>
+                                                            </div>
+
+                                                            <button *ngIf="profilesService.profile as perfil"
+                                                                (click)="downloadCV(perfil.curriculum)" type="button"
+                                                                id="downloadCV" class="btnEnviar btn-lg m-3 col-md-4"
+                                                                title="Descargar Currículum Vitae"><i
+                                                                    class="fas fa-file-download"></i> Descargar</button>
+                                                        </div>
+
+                                                        <div id="notificacionCV" class="text-center col-md-12">
+
+                                                        </div>
+                                                    </div>
+                                                </div>
+                                            </div>
+                                            <div class="col-sm-1"></div>
+                                        </div>
+                                    </div>
+                                </div>
+                                <div class="text-center mt-5">
+                                    <button (click)="deleteUser()" id="deleteUser" type="button"
+                                        class="btnEliminar col-md-7 mt-3 btn-lg"
+                                        title="Eliminar perfil y cuenta de usuario"><i class="fas fa-user-edit"></i>
+                                        Eliminar Usuario</button>
+                                </div>
+                            </div>
+                        </div>
+                    </div>
+
+                    <div id="notification" class="mt-5">
+
+                    </div>
+                </div>
+            </div>
+        </div>
+    </div>
+</section>

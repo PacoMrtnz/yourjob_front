@@ -1,0 +1,161 @@
+<!-- Sección Migas de pan -->
+<section class="migaspan">
+    <nav aria-label="breadcrumb">
+      <ol class="breadcrumb">
+        <span style="margin-left: 10px;"><i class="fas fa-info-circle"></i> Estás navegando en: &nbsp;</span>
+        <li class="breadcrumb-item active" aria-current="page"><a [routerLink]="['/register']" style="color: rgb(7, 7, 78);" class="linkFooter">Registrarse</a></li>
+      </ol>
+    </nav>
+  </section>
+
+<!-- Sección Registro -->
+<!-- <div class="container"> -->
+<section class="login_registro py-4">
+    <div class="container">
+        <div class="row">
+            <div class="col-md-12 m-auto">
+                <div class="well well-sm">
+                    <form #userForm="ngForm" (ngSubmit)="createUser(userForm)" ngNativeValidate
+                        class="form-horizontal text-center" method="post">
+                        <fieldset>
+                            <div class="titulo">
+                                <h2 class="colorAzulOscuro">Registro</h2>
+                            </div>
+                            <!-- <br><br> -->
+                            <p class="enlaceAzul">Ingrese los datos de su cuenta a registrar a continuación:</p>
+                            <p class="text-end fst-italic mt-2 mx-5" style="font-size: 0.9em;"> Los campos marcados con
+                                * son obligatorios.</p>
+                            <div class="col-md-1"></div>
+                            <div class="container col-md-10">
+                                <div class="form-group">
+                                    <div class="row">
+                                        <div class="col-md-5 m-auto mt-3">
+                                            <label for="nombreUsuario">
+                                                <span class="col-md-1 col-md-offset-2 text-center">* <i
+                                                        class="fas fa-user bigicon" title="Nombre de usuario"></i>
+                                                    Nombre de usuario:</span>
+                                            </label>
+
+                                            <input [(ngModel)]="usersService.selectedUser.username" id="nombreUsuario"
+                                                name="username" maxlength="20" pattern="[A-Za-z0-9áéíóúÁÉÍÓÚñÑ_-]{2,20}" title="Nombre de usuario no debe ser vacío ni acepta espacios. Además debe tener como mínimo 2 carácteres y máximo 20 carácteres. Acepta tildes y '_' '-'" type="text" placeholder="Nombre de usuario"
+                                                class="form-control text-center" required>
+                                        </div>
+                                        <div class="col-md-5 m-auto mt-3">
+                                            <label for="email">
+                                                <span class="col-md-1 col-md-offset-2 text-center">* <i
+                                                        class="fas fa-envelope bigicon" title="Email"></i> Email:</span>
+                                            </label>
+
+                                            <input [(ngModel)]="usersService.selectedUser.email" id="email" name="email"
+                                                type="email" placeholder="Email" class="form-control text-center"
+                                                required>
+                                        </div>
+                                    </div>
+                                </div>
+                                <div class="form-group">
+                                    <div class="row">
+                                        <div class="col-md-5 m-auto mt-3">
+                                            <label for="password">
+                                                <span class="col-md-1 col-md-offset-2 text-center">* <i
+                                                        class="fas fa-key bigicon" title="Contraseña"></i>
+                                                    Contraseña:</span>
+                                            </label>
+
+                                            <input [(ngModel)]="usersService.selectedUser.password" id="password" maxlength="255"
+                                                name="password" type="password" title="Contraseña debe tener mínimo 6 carácteres y no espacios en blanco" placeholder="Contraseña"
+                                                class="form-control text-center" required>
+                                        </div>
+                                        <div class="col-md-5 m-auto mt-3">
+                                            <label for="confirmPassword">
+                                                <span class="col-md-1 col-md-offset-2 text-center">* <i
+                                                        class="fas fa-key bigicon" title="Confirmar contraseña"></i>
+                                                    Confirmar contraseña:</span>
+                                            </label>
+
+                                            <input [(ngModel)]="usersService.selectedUser.confirmPassword" maxlength="255"
+                                                id="confirmPassword" name="confirmPassword" type="password"
+                                                placeholder="Confirmar contraseña" title="Confirmar contraseña debe tener mínimo 6 carácteres y no espacios en blanco" class="form-control text-center"
+                                                required>
+                                        </div>
+                                    </div>
+                                </div>
+                                <div class="form-group">
+                                    <div class="row">
+                                        <div class="col-md-3"></div>
+                                        <div class="col-md-6 m-auto mt-3">
+                                            <label for="accountType">
+                                                <span class="col-md-1 col-md-offset-2 text-center">* <i
+                                                        class="fas fa-user-circle bigicon"
+                                                        title="Tipo de cuenta">&nbsp;</i> Tipo de cuenta:
+                                                </span>
+                                            </label>
+
+                                            <div class="row">
+                                                <div class="col-md-3"></div>
+                                                <div class="col-md-6 m-2">
+                                                    <div class="row">
+                                                        <div class="col-md-5">
+                                                            <div class="form-check">
+                                                                <input
+                                                                    [(ngModel)]="usersService.selectedUser.accountType"
+                                                                    value="user" name="accountType"
+                                                                    class="form-check-input" type="radio"
+                                                                    id="accountType" checked required>
+                                                                <label class="form-check-label" for="accountType">
+                                                                    Usuario
+                                                                </label>
+                                                            </div>
+                                                        </div>
+                                                        <div class="col-md-5">
+                                                            <div class="form-check">
+                                                                <input
+                                                                    [(ngModel)]="usersService.selectedUser.accountType"
+                                                                    value="company" name="accountType"
+                                                                    class="form-check-input" type="radio"
+                                                                    id="accountType">
+                                                                <label class="form-check-label" for="accountType">
+                                                                    Empresa
+                                                                </label>
+                                                            </div>
+                                                        </div>
+                                                    </div>
+                                                </div>
+                                                <div class="col-md-3"></div>
+                                            </div>
+
+                                        </div>
+                                        <div class="col-md-3"></div>
+                                    </div>
+                                </div>
+
+                                <div class="form-group mt-5">
+                                    <div class="col-md-12 text-center">
+                                        <button type="submit" class="btnEnviar btn-lg col-md-5" title="Registrarse"><i
+                                                class="fas fa-user-plus"></i> Registrar</button>
+                                    </div>
+                                </div>
+                                <br>
+                                <!-- <div class="section"> -->
+                                <div id="notification">
+
+                                </div>
+                                <!-- </div> -->
+                                <p id="acceder">¿Ya tiene cuenta?
+                                    <a [routerLink]="['/login']" class="enlaceAzul" title="Ir a Identificarse">Acceda
+                                        aquí</a>
+                                </p>
+                                <p id="forgetPassword">
+                                    <a [routerLink]="['/reset-password']" class="enlaceAzul"
+                                        title="Ir a Resetear contraseña">¿Olvidó su contraseña?</a>
+                                </p>
+
+                            </div>
+                            <div class="col-md-1"></div>
+
+                        </fieldset>
+                    </form>
+
+
+                </div>
+
+

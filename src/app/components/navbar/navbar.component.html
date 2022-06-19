@@ -1,0 +1,78 @@
+<!-- NAVBAR -->
+
+<nav class="navbar navbar-expand-lg">
+    <div class="container">
+        <a class="navbar-brand" [routerLink]="['/']"><img src="assets/images/logo.s6" alt="logobanner"
+                style="max-width: 190px;">
+        </a>
+        <button class="navbar-toggler" type="button" data-bs-toggle="collapse" data-bs-target="#navbarSupportedContent"
+            aria-controls="navbarSupportedContent" aria-expanded="false" aria-label="Toggle navigation">
+            <span class="navbar-toggler-icon">
+                <i class="fas fa-bars" style="color:rgb(7, 7, 78); font-size:28px;"></i>
+            </span>
+        </button>
+        <div class="collapse navbar-collapse" id="navbarSupportedContent">
+            <ul class="navbar-nav m-auto mb-2 mb-lg-0">
+                <li class="nav-item">
+                    <a class="nav-link" [routerLink]="['/']" title="Ir a Inicio">Inicio</a>
+                </li>
+                <li class="nav-item dropdown">
+                    <a class="nav-link dropdown-toggle" href="#" id="navbarDropdown" role="button"
+                        data-bs-toggle="dropdown" aria-expanded="false" title="Desplegar Categorías">
+                        Categorías
+                    </a>
+                    <ul class="dropdown-menu" aria-labelledby="navbarDropdown">
+                        <li><a class="dropdown-item" (click)="filtrarXCategNavbar('')" title="Ir a Todas las Categorías"
+                                style="cursor: pointer;">Todas
+                                las Categorías</a></li>
+                        <li>
+                            <hr class="dropdown-divider">
+                        </li>
+                        <li *ngFor="let categ of listaCategorias"><a class="dropdown-item"
+                                (click)="filtrarXCategNavbar(categ)" title="Ir a {{categ}}"
+                                style="cursor: pointer;">{{categ}}</a></li>
+                    </ul>
+                </li>
+                <!-- <li class="nav-item">
+            <a class="nav-link" href="#curriculum">Subir CV</a>
+          </li> -->
+                <li class="nav-item dropdown">
+                    <a class="nav-link dropdown-toggle" href="#" id="navbarDropdown" role="button"
+                        data-bs-toggle="dropdown" aria-expanded="false" title="Desplegar Conócenos">
+                        Conócenos
+                    </a>
+                    <ul class="dropdown-menu" aria-labelledby="navbarDropdown">
+                        <li><a class="dropdown-item" href="#proceso" title="Ir a Proceso">Proceso</a></li>
+                        <li><a class="dropdown-item" href="#personal" title="Ir a Personal">Personal</a></li>
+                    </ul>
+                </li>
+                <li class="nav-item">
+                    <a class="nav-link" [routerLink]="['/contact']" title="Ir a Contacto">Contacto</a>
+                </li>
+
+                <div id="usuario">
+                    <form class="d-flex">
+                        <button [routerLink]="['/register']" type="button" class="btnRegister"
+                            title="Ir a Registrarse">Registrarse</button>
+                        <button [routerLink]="['/login']" type="button" class="btnLogin mx-1"
+                            title="Ir a Identificarse">Identificarse</button>
+                    </form>
+
+                </div>
+                <li class="nav-item text-center" style="font-size: 0.7em;">
+                    Con la tecnología de
+                    <span style="white-space:nowrap"><a class="goog-logo-link" href="https://translate.google.com"
+                            target="_blank" title="Ir a Traductor de Google"><img
+                                src="https://www.gstatic.com/images/branding/googlelogo/1x/googlelogo_color_42x16dp.png"
+                                style="padding-right: 3px" alt="Google Traductor de Google" width="37px"
+                                height="14px"></a>
+                    </span>
+                    <div id="google_translate_element" class="google text-center">
+
+                    </div>
+                </li>
+
+            </ul>
+        </div>
+    </div>
+</nav>

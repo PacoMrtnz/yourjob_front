@@ -1,0 +1,84 @@
+<!-- Sección Migas de pan -->
+<section class="migaspan">
+    <nav aria-label="breadcrumb">
+      <ol class="breadcrumb">
+        <span style="margin-left: 10px;"><i class="fas fa-info-circle"></i> Estás navegando en: &nbsp;</span>
+        <li class="breadcrumb-item active" aria-current="page"><a [routerLink]="['/login']" style="color: rgb(7, 7, 78);" class="linkFooter">Identificarse</a></li>
+      </ol>
+    </nav>
+  </section>
+
+<!-- Sección Login -->
+<section class="login_registro py-4">
+    <div class="container">
+        <div class="row">
+            <div class="col-md-12 m-auto">
+                <div class="well well-sm">
+                    <form #userForm="ngForm" (ngSubmit)="authenticateUser(userForm)" ngNativeValidate
+                        class="form-horizontal text-center" method="post">
+                        <fieldset>
+                            <div class="titulo">
+                                <h2 class="colorAzulOscuro">Acceso</h2>
+                            </div>
+                            <!-- <br> -->
+                            <p class="colorAzulOscuro">Ingrese los datos de su cuenta a continuación:</p>
+
+                            <!-- <br> -->
+                            <p class="text-end fst-italic mt-2 mx-5" style="font-size: 0.9em;"> Los campos marcados con
+                                * son obligatorios.</p>
+                            <!-- <br> -->
+                            <div class="form-group">
+                               
+                                <div class="col-md-5 m-auto mt-3">
+                                    <span class="col-md-1 col-md-offset-2 text-center" title="Nombre de usuario">* <i
+                                            class="fas fa-user bigicon"></i> Nombre de usuario:</span>
+                                    <input [(ngModel)]="usersService.selectedUser.username" id="nombreUsuario" maxlength="20"
+                                        name="username" pattern="[A-Za-z0-9áéíóúÁÉÍÓÚñÑ_-]{2,20}" title="Nombre de usuario no debe ser vacío ni acepta espacios. Además debe tener como mínimo 2 carácteres y máximo 20 carácteres. Acepta tildes y '_' '-'" type="text" placeholder="Nombre de usuario"
+                                        class="form-control text-center" required>
+                                </div>
+                            </div>
+                            <!-- <br> -->
+                            <div class="form-group">
+                                
+                                <div class="col-md-5 m-auto mt-3">
+                                    <span class="col-md-1 col-md-offset-2 text-center" title="Contraseña">* <i
+                                            class="fas fa-key bigicon"></i> Contraseña:</span>
+                                    <input [(ngModel)]="usersService.selectedUser.password" id="password" maxlength="255"
+                                        name="password" title="Contraseña debe tener mínimo 6 carácteres y no espacios en blanco" type="password" placeholder="Contraseña"
+                                        class="form-control text-center" required>
+                                </div>
+
+                            </div>
+
+
+                            <div class="form-group mt-5">
+                                <div class="col-md-12 text-center">
+                                    <button type="submit" class="btnEnviar btn-lg col-md-5" title="Identificarse"><i
+                                            class="fas fa-sign-in-alt"></i> Acceder</button>
+                                </div>
+                            </div>
+
+
+                            <br>
+                            <!-- <div class="section"> -->
+                            <div id="notification">
+
+                            </div>
+                            <!-- </div> -->
+                            <p id="registrar">¿No tiene cuenta? <a [routerLink]="['/register']" class="enlaceAzul"
+                                    title="Ir a Registrar">Regístrese aquí</a>
+                            </p>
+                            <p id="forgetPassword">
+                                <a [routerLink]="['/reset-password']" class="enlaceAzul"
+                                    title="Ir a Resetear contraseña">¿Olvidó su contraseña?</a>
+                            </p>
+                        </fieldset>
+                    </form>
+
+
+
+                </div>
+            </div>
+        </div>
+    </div>
+</section>

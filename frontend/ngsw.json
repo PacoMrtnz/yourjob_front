@@ -1,0 +1,153 @@
+{
+  "configVersion": 1,
+  "timestamp": 1655417437942,
+  "index": "/index.html",
+  "assetGroups": [
+    {
+      "name": "app",
+      "installMode": "prefetch",
+      "updateMode": "prefetch",
+      "cacheQueryOptions": {
+        "ignoreVary": true
+      },
+      "urls": [
+        "/favicon.ico",
+        "/index.html",
+        "/main.5cc2972c0c8fecf4.js",
+        "/manifest.webmanifest",
+        "/polyfills.adacc0f61eeea016.js",
+        "/runtime.eeca062dc9942a6e.js",
+        "/scripts.abbb37f329463b12.js",
+        "/styles.0c5c5476b4c2e411.css"
+      ],
+      "patterns": []
+    },
+    {
+      "name": "assets",
+      "installMode": "lazy",
+      "updateMode": "prefetch",
+      "cacheQueryOptions": {
+        "ignoreVary": true
+      },
+      "urls": [
+        "/assets/css/custom-styles.css",
+        "/assets/icons/icon-128x128.png",
+        "/assets/icons/icon-144x144.png",
+        "/assets/icons/icon-152x152.png",
+        "/assets/icons/icon-192x192.png",
+        "/assets/icons/icon-384x384.png",
+        "/assets/icons/icon-512x512.png",
+        "/assets/icons/icon-72x72.png",
+        "/assets/icons/icon-96x96.png",
+        "/assets/images/categoria1.png",
+        "/assets/images/certificate.jpg",
+        "/assets/images/contact.jpg",
+        "/assets/images/curriculum2.jpg",
+        "/assets/images/curriculum3.jpg",
+        "/assets/images/curriculum4.jpg",
+        "/assets/images/empleada2.jpg",
+        "/assets/images/empleado1.jpg",
+        "/assets/images/empleado3.jpg",
+        "/assets/images/empleadosCortar.jpg",
+        "/assets/images/empleadosWallpaper.jpg",
+        "/assets/images/empleo.png",
+        "/assets/images/espana.png",
+        "/assets/images/france.png",
+        "/assets/images/guarantee.png",
+        "/assets/images/loginBackground.jpg",
+        "/assets/images/loginVertical.jpg",
+        "/assets/images/logo.s6",
+        "/assets/images/main1.jpeg",
+        "/assets/images/main4.jpg",
+        "/assets/images/main6.jpg",
+        "/assets/images/portugal.png",
+        "/assets/images/proceso1.jpg",
+        "/assets/images/proceso2.jpg",
+        "/assets/images/proceso3.jpg",
+        "/assets/images/proceso3.webp",
+        "/assets/images/shield.png",
+        "/assets/images/united-kingdom.png",
+        "/assets/js/googleTranslate.js",
+        "/contact.1952375346226731.jpg",
+        "/curriculum3.38362c0ce7a1e198.jpg",
+        "/empleadosWallpaper.01a37b55df69c47f.jpg",
+        "/main6.e0c4efaf3f85f0c1.jpg",
+        "/proceso1.0ce980dd1dc08de6.jpg"
+      ],
+      "patterns": []
+    }
+  ],
+  "dataGroups": [],
+  "hashTable": {
+    "/assets/css/custom-styles.css": "535b128f9daf6dd225bc4500451d4962fc3b44ce",
+    "/assets/icons/icon-128x128.png": "8c6efa8d54feb662e553af901bc39f2bf6073711",
+    "/assets/icons/icon-144x144.png": "ea31ff8746e7236f08dccf2ae01ce57ebb006b4e",
+    "/assets/icons/icon-152x152.png": "1d2788217686cd46021526ef61308a1662185403",
+    "/assets/icons/icon-192x192.png": "41c03871e2bbba2d072c2f227b0b906a3cc4a42b",
+    "/assets/icons/icon-384x384.png": "c1408c05f3c3ed2e85ef850a0bba3a2fa264400c",
+    "/assets/icons/icon-512x512.png": "2c9ab64e21db1c3dc0ea8d83d2e8354c8eb07726",
+    "/assets/icons/icon-72x72.png": "b9eafa25f88e478924c8656246f84c334038d83d",
+    "/assets/icons/icon-96x96.png": "f21ef175412471d602e35f230a1553327c5f46b6",
+    "/assets/images/categoria1.png": "e82c632b8bebad79d818cca2b4fe2cce3918edd5",
+    "/assets/images/certificate.jpg": "801b101d71ded0a30ddbea6204bbfb6e108e8de7",
+    "/assets/images/contact.jpg": "8765b52e61836f0a211d43c4ad51a83fe53c3565",
+    "/assets/images/curriculum2.jpg": "f31175a8f102a900c4b876e74e471a037d804264",
+    "/assets/images/curriculum3.jpg": "04080cf6c20c475c3413b73ba6425993b014a4dd",
+    "/assets/images/curriculum4.jpg": "15a3a5d5ffeca344e434532f669f298d2d333917",
+    "/assets/images/empleada2.jpg": "d6502efbed57dba452804823c979f4d1e40aa592",
+    "/assets/images/empleado1.jpg": "1199f315f736aeb43fef398bdf3d5eda75df34d1",
+    "/assets/images/empleado3.jpg": "35d4e10a355e54e5e5f6c020b9e9e08ea6172004",
+    "/assets/images/empleadosCortar.jpg": "314c503ff0985a43a1c8e98d5dee96f279ad30b7",
+    "/assets/images/empleadosWallpaper.jpg": "16ed8eed33dd805bb6d3124a2e3334ce66f2456f",
+    "/assets/images/empleo.png": "f039cb12164381414a61f4cf2ee50af2d1f3d30f",
+    "/assets/images/espana.png": "66f215ff861581eb72b9c104ea6c99e1a8e8c8e0",
+    "/assets/images/france.png": "52ca2be8bf29666646ce347a5d0ef3f6cd547ca9",
+    "/assets/images/guarantee.png": "1f9c4c6db4c9f00708da09c6833d97d953dde690",
+    "/assets/images/loginBackground.jpg": "fc6ba33fcd369e3c6d14d46866f379285c4c3d6f",
+    "/assets/images/loginVertical.jpg": "63c9efdfbb9686d4c0938ad593c07a2d9b98f461",
+    "/assets/images/logo.s6": "a92df2334b14e7a9972103141334800f87da8e33",
+    "/assets/images/main1.jpeg": "68a8824e827812b5653626c4bfe21a109c28f310",
+    "/assets/images/main4.jpg": "8e17ec59131033d16c15260d4bd8802e817f06b9",
+    "/assets/images/main6.jpg": "bd4ff9eb777e80d392b4df881e23d9d4f4a4ddd8",
+    "/assets/images/portugal.png": "1b7de6001206cc88b6c52f9bbe637fe9f0f10dbe",
+    "/assets/images/proceso1.jpg": "0de434e8bb58b501030deb4b448dcc3053894426",
+    "/assets/images/proceso2.jpg": "fec6e87d5e81da9b8e465b3f6fd56bc0acfff2c5",
+    "/assets/images/proceso3.jpg": "8e685b274a74be91c6cdf666f18bd146c8d0ba36",
+    "/assets/images/proceso3.webp": "cfdaba9d8264950e63bd898c1d37b7174d3f596e",
+    "/assets/images/shield.png": "5c6b4381b9e29f96d97d1e68bca6ba4a91ebebb8",
+    "/assets/images/united-kingdom.png": "6495d0a202721472461a53b11c79aea953184a7c",
+    "/assets/js/googleTranslate.js": "b4896fa7a7e95c3a6488a0d474c3c389f79743d8",
+    "/contact.1952375346226731.jpg": "8765b52e61836f0a211d43c4ad51a83fe53c3565",
+    "/curriculum3.38362c0ce7a1e198.jpg": "04080cf6c20c475c3413b73ba6425993b014a4dd",
+    "/empleadosWallpaper.01a37b55df69c47f.jpg": "16ed8eed33dd805bb6d3124a2e3334ce66f2456f",
+    "/favicon.ico": "22f6a4a3bcaafafb0254e0f2fa4ceb89e505e8b2",
+    "/index.html": "78e3bfb8b0d59ab5cbc775f98e3a549067f8d8a7",
+    "/main.5cc2972c0c8fecf4.js": "013ca4edded2bdcbb212ca786cba89201e938457",
+    "/main6.e0c4efaf3f85f0c1.jpg": "bd4ff9eb777e80d392b4df881e23d9d4f4a4ddd8",
+    "/manifest.webmanifest": "b4541ced0d3f2d4ace739ae9eb8bac8a101c65ba",
+    "/polyfills.adacc0f61eeea016.js": "2bed474e1de4bcc0403bc20b7b8558055c231b54",
+    "/proceso1.0ce980dd1dc08de6.jpg": "0de434e8bb58b501030deb4b448dcc3053894426",
+    "/runtime.eeca062dc9942a6e.js": "d1286c4ca3486ab38e3ad9a96c718c5e30a78809",
+    "/scripts.abbb37f329463b12.js": "f071c80334dd74cc1a8b8d6044d58933cf76d0af",
+    "/styles.0c5c5476b4c2e411.css": "e1c28d2e7ef707a394e58aaafa64b28e4dded95b"
+  },
+  "navigationUrls": [
+    {
+      "positive": true,
+      "regex": "^\\/.*$"
+    },
+    {
+      "positive": false,
+      "regex": "^\\/(?:.+\\/)?[^/]*\\.[^/]*$"
+    },
+    {
+      "positive": false,
+      "regex": "^\\/(?:.+\\/)?[^/]*__[^/]*$"
+    },
+    {
+      "positive": false,
+      "regex": "^\\/(?:.+\\/)?[^/]*__[^/]*\\/.*$"
+    }
+  ],
+  "navigationRequestStrategy": "performance"
+}

@@ -1,0 +1,122 @@
+<!-- Sección Migas de pan -->
+<section class="migaspan">
+    <nav aria-label="breadcrumb">
+        <ol class="breadcrumb">
+            <span style="margin-left: 10px;"><i class="fas fa-info-circle"></i> Estás navegando en: &nbsp;</span>
+            <li class="breadcrumb-item active" aria-current="page"><a [routerLink]="['/jobs']"
+                    style="color: rgb(7, 7, 78);" class="linkFooter">Empleos</a></li>
+        </ol>
+    </nav>
+</section>
+
+<!-- Sección Contacto -->
+<!-- <div class="container"> -->
+<section class="contacto login_registro py-4">
+    <div class="container">
+        <div class="row">
+            <div class="col-md-12 m-auto">
+                <div class="well well-sm m-auto">
+                    <div class="titulo">
+                        <h2 class="colorAzulOscuro">Usuarios inscritos al empleo</h2>
+                    </div>
+                    <!-- <br> -->
+                    <!-- TABLA DE USUARIOS INSCRITOS -->
+                    <div class="container text-center" style="margin: auto;">
+                        <table class="table table-striped text-center"
+                            style="vertical-align: middle; font-size: 0.9em;">
+                            <thead>
+                                <tr>
+                                    <!-- <th scope="col" class="text-center click" (click)="sort('id')"><i class="fas fa-sort">ID</i></th> -->
+                                    <th scope="col" class="text-center colorAzulOscuro" title="Avatar"><i
+                                            class="fas fa-user-circle"></i>
+                                        Avatar</th>
+                                    <th scope="col" class="text-center colorAzulOscuro" (click)="sort3('username')"
+                                        style="cursor: pointer;" title="Ordenar por Usuario"><i class="fas fa-sort"></i>
+                                        Usuario</th>
+                                    <th scope="col" class="text-center colorAzulOscuro" (click)="sort3('email')"
+                                        style="cursor: pointer;" title="Ordenar por Email">
+                                        <i class="fas fa-sort"></i>
+                                        Email
+                                    </th>
+                                    <th scope="col" class="text-center colorAzulOscuro" title="GitHub">
+                                        <i class="fab fa-github"></i>
+                                        GitHub
+                                    </th>
+                                    <th scope="col" class="text-center colorAzulOscuro" title="Twitter">
+                                        <i class="fab fa-twitter"></i>
+                                        Twitter
+                                    </th>
+                                    <th scope="col" class="text-center colorAzulOscuro" title="Instagram">
+                                        <i class="fab fa-instagram"></i>
+                                        Instagram
+                                    </th>
+                                    <!-- <th scope="col" class="text-center click" (click)="sort('horas')"><i class="fas fa-sort">HORAS</i></th> -->
+                                    <th scope="col" class="text-center colorAzulOscuro" title="Currículum vitae">
+                                        <i class="fas fa-file-pdf"></i>
+                                        Currículum
+                                    </th>
+                                </tr>
+                            </thead>
+                            <tbody>
+                                <tr
+                                    *ngFor="let usuario of jobsService.listaAllInscribed | orderBy: key3: reverse3 | paginate: { id: 'pagination3', itemsPerPage: 6, currentPage: p3 }">
+                                    <td>
+                                        <div class="icon m-auto">
+                                            <img id="imgAvatar-{{usuario._id}}" src=""
+                                                class="card-img-top rounded-circle">
+
+                                        </div>
+                                    </td>
+
+                                    <td>{{usuario.username}}</td>
+                                    <td>{{usuario.email}}</td>
+                                    <td>
+                                        <span id="github-{{usuario._id}}"></span>
+                                    </td>
+                                    <td>
+                                        <span id="twitter-{{usuario._id}}"></span>
+                                    </td>
+                                    <td>
+
+                                        <span id="instagram-{{usuario._id}}"></span>
+
+                                    </td>
+                                    <td>
+
+                                        <span id="curriculum-{{usuario._id}}"></span>
+
+                                    </td>
+
+
+                                </tr>
+
+                                <tr
+                                    *ngIf="jobsService.listaAllInscribed === undefined || jobsService.listaAllInscribed.length === 0">
+                                    <td colspan='8' class="fs-5">NO HAY USUARIOS
+                                    </td>
+                                </tr>
+
+                            </tbody>
+
+                        </table>
+
+                        <div class="paginacion mt-5">
+                            <pagination-controls id="pagination3" (pageChange)="p3 = $event" responsive:boolean="true"
+                                previousLabel="Anterior" nextLabel="Siguiente">
+                            </pagination-controls>
+                        </div>
+
+
+
+                        <div id="notificationAllInscribed" class="text-center col-md-12">
+
+                        </div>
+
+                    </div>
+
+                </div>
+            </div>
+        </div>
+    </div>
+</section>
+<!-- </div> -->

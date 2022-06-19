@@ -1,0 +1,1702 @@
+<!-- Sección Migas de pan -->
+<section class="migaspan">
+    <nav aria-label="breadcrumb">
+      <ol class="breadcrumb">
+        <span style="margin-left: 10px;"><i class="fas fa-info-circle"></i> Estás navegando en: &nbsp;</span>
+        <li class="breadcrumb-item active" aria-current="page"><a [routerLink]="['/jobs']" style="color: rgb(7, 7, 78);" class="linkFooter">Empleos</a></li>
+      </ol>
+    </nav>
+  </section>
+
+<!-- Sección Profile -->
+<section class="login_registro py-2">
+    <div class="container">
+        <div class="row">
+            <div class="col-md-12 m-auto">
+                <div class="well well-sm">
+                    <div class="jobs">
+                        <!-- Sección Todas Categorías -->
+                        <section class="contacto">
+                            <div class="container">
+                                <div class="row">
+                                    <div class="col-md-12 m-auto">
+                                        <div class="well well-sm">
+                                            <div class="titulo">
+                                                <h2 class="colorAzulOscuro">Ofertas de
+                                                    Trabajo</h2>
+                                            </div>
+                                            <!-- <br> -->
+                                            <!--Select para ordenar trabajo-->
+
+                                            <div class="mx-2 text-center">
+                                                <span scope="col" class="text-center mx-3 colorAzulOscuro"
+                                                    style="cursor: pointer;" (click)="sort('updatedAt')"
+                                                    title="Ordenar por Actualizado"><i class="fas fa-sort"></i>
+                                                    Actualizado</span>
+                                                <span scope="col" class="text-center mx-3 colorAzulOscuro"
+                                                    style="cursor: pointer;" (click)="sort('salario')"
+                                                    title="Ordenar por Salario">
+                                                    <i class="fas fa-sort"></i>
+                                                    Salario</span>
+                                                <span scope="col" class="text-center mx-3 colorAzulOscuro"
+                                                    style="cursor: pointer;" (click)="sort('duracion')"
+                                                    title="Ordenar por Duración"><i class="fas fa-sort"></i>
+                                                    Duración</span>
+                                                <span scope="col" class="text-center mx-3 colorAzulOscuro"
+                                                    style="cursor: pointer;" (click)="sort('horas')"
+                                                    title="Ordenar por Horas"><i class="fas fa-sort"></i>
+                                                    Horas</span>
+                                                <span scope="col" class="text-center mx-3 colorAzulOscuro"
+                                                    style="cursor: pointer;" (click)="sort('title')"
+                                                    title="Ordenar por Título"><i class="fas fa-sort"></i>
+                                                    Título</span>
+                                                <span scope="col" class="text-center mx-3 colorAzulOscuro"
+                                                    style="cursor: pointer;" (click)="sort('categoria')"
+                                                    title="Ordenar por Categoría"><i class="fas fa-sort"></i>
+                                                    Categoría</span>
+                                                <span scope="col" class="text-center mx-3 colorAzulOscuro"
+                                                    style="cursor: pointer;" (click)="sort('location')"
+                                                    title="Ordenar por location"><i class="fas fa-sort"></i>
+                                                    Ubicación</span>
+                                                <span scope="col" class="text-center mx-3 colorAzulOscuro"
+                                                    style="cursor: pointer;" (click)="sort('description')"
+                                                    title="Ordenar por Descripción"><i class="fas fa-sort"></i>
+                                                    Descripción</span>
+                                                <span scope="col" class="text-center mx-3 colorAzulOscuro"
+                                                    style="cursor: pointer;" (click)="sort('author')"
+                                                    title="Ordenar por Autor">
+                                                    <i class="fas fa-sort"></i>
+                                                    Autor</span>
+                                            </div>
+
+                                            <div
+                                                class="d-flex align-items-end justify-content-around flex-row text-black mt-3 mb-2">
+                                                <div class="mx-2 col-md-8">
+                                                    <form class="formBuscar text-center">
+                                                        <label for="buscar" class="colorAzulOscuro">
+                                                            <i class="fas fa-search bigicon" title="Buscar empleo"></i>
+                                                            Buscador: </label>
+                                                        <input type="search" id="buscar" name="search"
+                                                            class="form-control text-center"
+                                                            [(ngModel)]="jobsService.searchText"
+                                                            placeholder="Buscar empleo">
+                                                    </form>
+                                                </div>
+
+                                                <div class="mt-3">
+                                                    <button type="button" id="showInscribedJobsBtn"
+                                                        class="btnEnviar px-5" title="Ir a Ver empleos inscritos"
+                                                        (click)="getInscribedJobs()" data-bs-toggle="modal"
+                                                        data-bs-target="#showInscribedJobs">
+
+                                                        <i class="fas fa-hand-point-right"></i> Ver empleos
+                                                        inscritos</button>
+                                                </div>
+                                            </div>
+                                            <div class="modal fade" id="showInscribedJobs" data-bs-backdrop="static"
+                                                data-bs-keyboard="false" tabindex="-1"
+                                                aria-labelledby="#showInscribedJobsModalLabel" aria-hidden="true">
+                                                <div class="modal-dialog modal-xl">
+                                                    <div class="modal-content">
+                                                        <div class="modal-header">
+                                                            <h5 class="modal-title fs-4"
+                                                                id="showInscribedJobsModalLabel">
+                                                                Ver empleos inscritos:
+
+                                                            </h5> <button id="closeModalShowInscribedJobs" type="button"
+                                                                class="btn-close" data-bs-dismiss="modal"
+                                                                aria-label="Close" title="Cerrar ventana"></button>
+                                                        </div>
+                                                        <div class="modal-body">
+                                                            <div class="row">
+                                                                <div class="col-2 d-flex justify-content-between">
+                                                                    <div class="d-flex align-items-center text-center">
+                                                                        <div class="text-center">
+                                                                            <img *ngIf="profilesService.profile as perfil"
+                                                                                src="{{perfil.avatar}}"
+                                                                                class="img-fluid z-depth-1-half rounded-circle">
+                                                                            <div style="height: 10px">
+                                                                            </div>
+                                                                            <p class="title mb-0">
+                                                                                <i
+                                                                                    class="fas fa-at"></i>{{profilesService.updatedUser.username}}
+                                                                            </p>
+                                                                        </div>
+                                                                    </div>
+                                                                </div>
+
+                                                                <div class="col-10">
+                                                                    <div class="container text-center"
+                                                                        style="margin: auto;">
+                                                                        <table class="table table-striped text-center"
+                                                                            style="vertical-align: middle; font-size: 0.9em;">
+                                                                            <thead>
+                                                                                <tr>
+                                                                                    <!-- <th scope="col" class="text-center click" (click)="sort('id')"><i class="fas fa-sort">ID</i></th> -->
+                                                                                    <th scope="col"
+                                                                                        class="text-center colorAzulOscuro"
+                                                                                        (click)="sort2('title')"
+                                                                                        style="cursor: pointer;"
+                                                                                        title="Ordenar por Título"><i
+                                                                                            class="fas fa-sort"></i>
+                                                                                        Título</th>
+                                                                                    <th scope="col"
+                                                                                        class="text-center colorAzulOscuro"
+                                                                                        (click)="sort2('categoria')"
+                                                                                        style="cursor: pointer;"
+                                                                                        title="Ordenar por Categoría"><i
+                                                                                            class="fas fa-sort"></i>
+                                                                                        Categoría</th>
+                                                                                    <th scope="col"
+                                                                                        class="text-center colorAzulOscuro"
+                                                                                        (click)="sort2('salario')"
+                                                                                        style="cursor: pointer;"
+                                                                                        title="Ordenar por Salario"><i
+                                                                                            class="fas fa-sort"></i>
+                                                                                        Salario</th>
+                                                                                    <th scope="col"
+                                                                                        class="text-center colorAzulOscuro"
+                                                                                        (click)="sort2('duracion')"
+                                                                                        style="cursor: pointer;"
+                                                                                        title="Ordenar por Duración"><i
+                                                                                            class="fas fa-sort"></i>
+                                                                                        Duración</th>
+                                                                                    <th scope="col"
+                                                                                        class="text-center colorAzulOscuro"
+                                                                                        (click)="sort2('location')"
+                                                                                        style="cursor: pointer;"
+                                                                                        title="Ordenar por Ubicación"><i
+                                                                                            class="fas fa-sort"></i>
+                                                                                        Ubicación</th>
+                                                                                    <th scope="col"
+                                                                                        class="text-center colorAzulOscuro"
+                                                                                        (click)="sort2('horas')"
+                                                                                        style="cursor: pointer;"
+                                                                                        title="Ordenar por Horas"><i
+                                                                                            class="fas fa-sort"></i>
+                                                                                        Horas</th>
+                                                                                    <th scope="col"
+                                                                                        class="text-center colorAzulOscuro"
+                                                                                        (click)="sort2('author')"
+                                                                                        style="cursor: pointer;"
+                                                                                        title="Ordenar por Autor"><i
+                                                                                            class="fas fa-sort"></i>
+                                                                                        Autor</th>
+                                                                                    <!-- <th scope="col" class="text-center click" (click)="sort('horas')"><i class="fas fa-sort">HORAS</i></th> -->
+                                                                                    <th scope="col"
+                                                                                        class="text-center colorAzulOscuro"
+                                                                                        title="Eliminar inscripción"><i
+                                                                                            class="fas fa-trash-alt"></i>
+                                                                                        Eliminar</th>
+                                                                                </tr>
+                                                                            </thead>
+                                                                            <tbody>
+                                                                                <tr
+                                                                                    *ngFor="let empleo of jobsService.listaInscribedJobsAux | orderBy: key2: reverse2 | paginate: { id: 'pagination2', itemsPerPage: 6, currentPage: p2 }">
+                                                                                    <td>{{empleo.title}}</td>
+                                                                                    <td>{{empleo.categoria}}</td>
+                                                                                    <td *ngIf="empleo.salario == 0">Sin
+                                                                                        especificar</td>
+                                                                                    <td *ngIf="empleo.salario > 0">
+                                                                                        {{empleo.salario |
+                                                                                        currency:'EUR'}}</td>
+                                                                                    <td>{{empleo.duracion}}</td>
+                                                                                    <td>{{empleo.location}}</td>
+                                                                                    <td *ngIf="empleo.horas === 0">Sin
+                                                                                        especificar</td>
+                                                                                    <td *ngIf="empleo.horas !== 0">
+                                                                                        {{empleo.horas}} h/semana</td>
+                                                                                    <td>{{empleo.author}}</td>
+                                                                                    <td>
+                                                                                        <button type="button"
+                                                                                            class="btn btn-danger"
+                                                                                            (click)="eliminarInscribedJob(empleo)"
+                                                                                            title="Eliminar inscripción">
+                                                                                            Eliminar</button>
+                                                                                    </td>
+
+                                                                                </tr>
+
+                                                                                <tr
+                                                                                    *ngIf="jobsService.listaInscribedJobsAux === undefined || jobsService.listaInscribedJobsAux.length === 0">
+                                                                                    <td colspan='8' class="fs-5">NO
+                                                                                        ESTÁS INSCRITO A NINGÚN EMPLEO
+                                                                                    </td>
+                                                                                </tr>
+
+                                                                            </tbody>
+
+                                                                        </table>
+
+                                                                        <div class="paginacion mt-5">
+                                                                            <pagination-controls id="pagination2"
+                                                                                (pageChange)="p2 = $event"
+                                                                                responsive:boolean="true"
+                                                                                previousLabel="Anterior"
+                                                                                nextLabel="Siguiente">
+                                                                            </pagination-controls>
+                                                                        </div>
+
+
+
+                                                                        <div id="notificationInscribedJob"
+                                                                            class="text-center col-md-12">
+
+                                                                        </div>
+
+                                                                    </div>
+                                                                </div>
+
+                                                            </div>
+
+
+
+
+
+
+
+
+                                                            <div id="notificationShowInscribedJobs"
+                                                                class="text-center col-md-12">
+
+                                                            </div>
+
+                                                        </div>
+                                                        <div class="modal-footer">
+
+                                                            <p class="footer-title text-end fst-italic mt-2 mx-5"
+                                                                style="font-size: 0.9em;">
+                                                                Solo puede borrar o ver información de empleos,
+                                                                si quiere editar debe buscarlo en la sección de empleos
+                                                                usando el buscador.
+                                                            </p>
+
+                                                        </div>
+                                                    </div>
+                                                </div>
+                                            </div>
+
+
+
+                                            <!-- <br> -->
+                                            <div
+                                                *ngIf="profilesService.updatedUser.accountType === 'company' || profilesService.updatedUser.accountType === 'admin'">
+                                                <button type="button" class="btnEnviar col-md-12 mt-3 btn-lg"
+                                                    title="Publicar un empleo" data-bs-toggle="modal"
+                                                    data-bs-target="#postJobModal"><i class="fas fa-plus"></i>
+                                                    Publicar empleo</button>
+                                                <div class="modal fade" id="postJobModal" data-bs-backdrop="static"
+                                                    data-bs-keyboard="false" tabindex="-1"
+                                                    aria-labelledby="postJobModalLabel" aria-hidden="true">
+                                                    <div class="modal-dialog modal-xl">
+                                                        <div class="modal-content">
+                                                            <div class="modal-header">
+                                                                <h5 class="modal-title fs-4" id="postJobModalLabel">
+                                                                    Publicar empleo
+                                                                </h5> <button id="closeModalPostJob" type="button"
+                                                                    class="btn-close" data-bs-dismiss="modal"
+                                                                    aria-label="Close" title="Cerrar ventana"></button>
+                                                            </div>
+                                                            <div class="modal-body">
+
+                                                                <div class="row">
+                                                                    <div class="col-3 d-flex justify-content-between">
+                                                                        <div
+                                                                            class="d-flex align-items-center text-center">
+                                                                            <div class="text-center">
+                                                                                <img *ngIf="profilesService.profile as perfil"
+                                                                                    src="{{perfil.avatar}}"
+                                                                                    class="img-fluid z-depth-1-half rounded-circle">
+                                                                                <div style="height: 10px">
+                                                                                </div>
+                                                                                <p class="title mb-0">
+                                                                                    <i
+                                                                                        class="fas fa-at"></i>{{profilesService.updatedUser.username}}
+                                                                                </p>
+                                                                                <!-- <p class="text-muted "
+                                                                                style="font-size: 13px">
+                                                                                Consultant</p> -->
+                                                                            </div>
+                                                                        </div>
+                                                                    </div>
+
+
+                                                                    <div class="col-9">
+                                                                        <div class="contenedor text-center"
+                                                                            style="margin: auto;">
+
+                                                                            <form #jobForm="ngForm"
+                                                                                (ngSubmit)="createJob(jobForm)"
+                                                                                ngNativeValidate
+                                                                                class="form-horizontal text-center border"
+                                                                                method="post">
+                                                                                <fieldset>
+                                                                                    <!-- <legend class="header" id="registro"
+                                                                                        style="border-radius: 50%;">
+                                                                                        Registro</legend> -->
+                                                                                    <legend>Formulario de empleo:
+                                                                                    </legend>
+                                                                                    <!-- <br><br>
+                                                                                    <p class="enlaceAzul">Ingrese los
+                                                                                        datos de su cuenta a registrar a
+                                                                                        continuación:</p> -->
+                                                                                    <div class="container col-md-12">
+                                                                                        <div class="form-group">
+                                                                                            <div class="row">
+                                                                                                <div
+                                                                                                    class="col-md-5 m-auto mt-3">
+                                                                                                    <label for="title">
+                                                                                                        <span
+                                                                                                            class="col-md-1 col-md-offset-2 text-center">*
+                                                                                                            <i class="fas fa-heading bigicon"
+                                                                                                                title="Título"></i>
+                                                                                                            Título:</span>
+
+                                                                                                    </label>
+
+                                                                                                    <input
+                                                                                                        [(ngModel)]="jobsService.selectedJob.title"
+                                                                                                        id="title"
+                                                                                                        name="title"
+                                                                                                        maxlength="20"
+                                                                                                        pattern="[a-zA-ZáéíóúÁÉÍÓÚñÑ ]{2,20}"
+                                                                                                        title="Título debe ser solamente texto con espacios, mínimo de 2 carácteres y no superior a 20 carácteres"
+                                                                                                        type="text"
+                                                                                                        placeholder="Título"
+                                                                                                        class="form-control text-center"
+                                                                                                        required>
+                                                                                                </div>
+                                                                                                <div
+                                                                                                    class="col-md-5 m-auto mt-3">
+                                                                                                    <label for="author">
+                                                                                                        <span
+                                                                                                            class="col-md-1 col-md-offset-2 text-center">*
+                                                                                                            <i class="fas fa-briefcase bigicon"
+                                                                                                                title="Autor"></i>
+                                                                                                            Autor:</span>
+                                                                                                    </label>
+                                                                                                    <input
+                                                                                                        value="{{profilesService.updatedUser.username}}"
+                                                                                                        id="author"
+                                                                                                        name="author"
+                                                                                                        type="text"
+                                                                                                        placeholder="Autor"
+                                                                                                        class="form-control text-center"
+                                                                                                        style="cursor: no-drop;"
+                                                                                                        [readonly]="true"
+                                                                                                        required>
+                                                                                                </div>
+                                                                                            </div>
+                                                                                        </div>
+                                                                                        <div class="form-group">
+                                                                                            <div class="row">
+                                                                                                <div
+                                                                                                    class="col-md-5 m-auto mt-3">
+                                                                                                    <label
+                                                                                                        for="location">
+                                                                                                        <span
+                                                                                                            class="col-md-1 col-md-offset-2 text-center">
+                                                                                                            <i class="fas fa-map-marked-alt bigicon"
+                                                                                                                title="Ubicación"></i>
+                                                                                                            Ubicación:</span>
+                                                                                                    </label>
+
+
+
+                                                                                                    <select
+                                                                                                        [(ngModel)]="jobsService.selectedJob.location"
+                                                                                                        id="location"
+                                                                                                        name=location
+                                                                                                        class="form-select text-center"
+                                                                                                        required>
+                                                                                                        <option
+                                                                                                            value="Sin ubicación"
+                                                                                                            selected>
+                                                                                                            Sin
+                                                                                                            ubicación
+                                                                                                        </option>
+                                                                                                        <option
+                                                                                                            value="Andalucía">
+                                                                                                            Andalucía
+                                                                                                        </option>
+                                                                                                        <option
+                                                                                                            value="Aragón">
+                                                                                                            Aragón
+                                                                                                        </option>
+                                                                                                        <option
+                                                                                                            value="Asturias">
+                                                                                                            Asturias
+                                                                                                        </option>
+                                                                                                        <option
+                                                                                                            value="Baleares">
+                                                                                                            Baleares
+                                                                                                        </option>
+                                                                                                        <option
+                                                                                                            value="Ceuta">
+                                                                                                            Ceuta
+                                                                                                        </option>
+                                                                                                        <option
+                                                                                                            value="Canarias">
+                                                                                                            Canarias
+                                                                                                        </option>
+                                                                                                        <option
+                                                                                                            value="Cantabria">
+                                                                                                            Cantabria
+                                                                                                        </option>
+                                                                                                        <option
+                                                                                                            value="Castilla-La Mancha">
+                                                                                                            Castilla-La
+                                                                                                            Mancha
+                                                                                                        </option>
+                                                                                                        <option
+                                                                                                            value="Castilla y Leon">
+                                                                                                            Castilla y
+                                                                                                            Leon
+                                                                                                        </option>
+                                                                                                        <option
+                                                                                                            value="Catalunya">
+                                                                                                            Catalunya
+                                                                                                        </option>
+                                                                                                        <option
+                                                                                                            value="Comunidad Valenciana">
+                                                                                                            Comunidad
+                                                                                                            Valenciana
+                                                                                                        </option>
+                                                                                                        <option
+                                                                                                            value="Extremadura">
+                                                                                                            Extremadura
+                                                                                                        </option>
+                                                                                                        <option
+                                                                                                            value="Galicia">
+                                                                                                            Galicia
+                                                                                                        </option>
+                                                                                                        <option
+                                                                                                            value="La Rioja">
+                                                                                                            La Rioja
+                                                                                                        </option>
+                                                                                                        <option
+                                                                                                            value="Madrid">
+                                                                                                            Madrid
+                                                                                                        </option>
+                                                                                                        <option
+                                                                                                            value="Melilla">
+                                                                                                            Melilla
+                                                                                                        </option>
+                                                                                                        <option
+                                                                                                            value="Murcia">
+                                                                                                            Murcia
+                                                                                                        </option>
+                                                                                                        <option
+                                                                                                            value="Navarra">
+                                                                                                            Navarra
+                                                                                                        </option>
+                                                                                                        <option
+                                                                                                            value="Pais Vasco">
+                                                                                                            Pais Vasco
+                                                                                                        </option>
+                                                                                                    </select>
+
+                                                                                                </div>
+                                                                                                <div
+                                                                                                    class="col-md-5 m-auto mt-3">
+                                                                                                    <label
+                                                                                                        for="categoria">
+                                                                                                        <span
+                                                                                                            class="col-md-1 col-md-offset-2 text-center">
+                                                                                                            <i class="fas fa-tag bigicon"
+                                                                                                                title="Categoría"></i>
+                                                                                                            Categoría:</span>
+                                                                                                    </label>
+
+                                                                                                    <select
+                                                                                                        [(ngModel)]="jobsService.selectedJob.categoria"
+                                                                                                        id="categoria"
+                                                                                                        name=categoria
+                                                                                                        class="form-select text-center"
+                                                                                                        required>
+                                                                                                        <option
+                                                                                                            value="Sin categoría"
+                                                                                                            selected>
+                                                                                                            Sin
+                                                                                                            categoría
+
+                                                                                                        <option
+                                                                                                            *ngFor="let categ of listaCategorias"
+                                                                                                            [value]="categ">
+                                                                                                            {{categ}}
+                                                                                                        </option>
+
+                                                                                                    </select>
+                                                                                                </div>
+                                                                                            </div>
+                                                                                        </div>
+                                                                                        <div class="form-group">
+                                                                                            <div class="row">
+                                                                                                <div
+                                                                                                    class="col-md-5 m-auto mt-3">
+                                                                                                    <label
+                                                                                                        for="salario">
+                                                                                                        <span
+                                                                                                            class="col-md-1 col-md-offset-2 text-center">
+                                                                                                            <i class="fas fa-hand-holding-usd bigicon"
+                                                                                                                title="Salario"></i>
+                                                                                                            Salario:</span>
+
+                                                                                                    </label>
+
+                                                                                                    <input
+                                                                                                        [(ngModel)]="jobsService.selectedJob.salario"
+                                                                                                        id="salario"
+                                                                                                        name="salario"
+                                                                                                        type="number"
+                                                                                                        pattern="[0-4][0-9][0-9][0-9][0-9][0-9]|500000"
+                                                                                                        title="Salario debe ser un número entre 0 y 500000"
+                                                                                                        placeholder="Salario"
+                                                                                                        class="form-control text-center"
+                                                                                                        required>
+                                                                                                </div>
+                                                                                                <div
+                                                                                                    class="col-md-5 m-auto mt-3">
+                                                                                                    <label for="horas">
+                                                                                                        <span
+                                                                                                            class="col-md-1 col-md-offset-2 text-center"><i
+                                                                                                                class="fas fa-clock bigicon"
+                                                                                                                title="Horas / semana"></i>
+                                                                                                            Horas /
+                                                                                                            semana:</span>
+                                                                                                    </label>
+                                                                                                    <input
+                                                                                                        [(ngModel)]="jobsService.selectedJob.horas"
+                                                                                                        id="horas"
+                                                                                                        name="horas"
+                                                                                                        type="number"
+                                                                                                        pattern="[0-3][0-9]|40"
+                                                                                                        title="Horas debe ser un número entre 0 y 40"
+                                                                                                        placeholder="Horas / semana"
+                                                                                                        class="form-control text-center"
+                                                                                                        required>
+                                                                                                </div>
+                                                                                            </div>
+                                                                                        </div>
+                                                                                        <div class="form-group">
+                                                                                            <div class="row">
+                                                                                                <div
+                                                                                                    class="col-md-11 m-auto mt-3">
+                                                                                                    <label
+                                                                                                        for="duracion">
+                                                                                                        <span
+                                                                                                            class="col-md-1 col-md-offset-2 text-center"><i
+                                                                                                                class="far fa-calendar-alt bigicon"
+                                                                                                                title="Duración"></i>
+                                                                                                            Duración:</span>
+                                                                                                    </label>
+
+                                                                                                    <select
+                                                                                                        [(ngModel)]="jobsService.selectedJob.duracion"
+                                                                                                        id="duracion"
+                                                                                                        name=duracion
+                                                                                                        class="form-select text-center"
+                                                                                                        required>
+                                                                                                        <option
+                                                                                                            value="Sin duración"
+                                                                                                            selected>
+                                                                                                            Sin duración
+                                                                                                        </option>
+                                                                                                        <option
+                                                                                                            value="Indefinido">
+                                                                                                            Indefinido
+                                                                                                        </option>
+                                                                                                        <option
+                                                                                                            value="Parcial">
+                                                                                                            Parcial
+                                                                                                        </option>
+                                                                                                        <option
+                                                                                                            value="Días sueltos">
+                                                                                                            Días sueltos
+                                                                                                        </option>
+                                                                                                        <option
+                                                                                                            value="Freelance">
+                                                                                                            Freelance
+                                                                                                        </option>
+                                                                                                    </select>
+                                                                                                </div>
+                                                                                            </div>
+                                                                                        </div>
+                                                                                        <div class="form-group">
+                                                                                            <div class="row">
+
+                                                                                                <div
+                                                                                                    class="col-md-12 m-auto mt-3">
+                                                                                                    <label
+                                                                                                        for="description">
+                                                                                                        <span
+                                                                                                            class="col-md-1 col-md-offset-2 text-center">
+                                                                                                            * <i class="fas fa-info-circle bigicon"
+                                                                                                                title="Descripción"></i>
+                                                                                                            Descripción:</span>
+                                                                                                    </label>
+
+                                                                                                    <textarea
+                                                                                                        [(ngModel)]="jobsService.selectedJob.description"
+                                                                                                        class="form-control text-center"
+                                                                                                        id="description"
+                                                                                                        name="description"
+                                                                                                        placeholder="Indique una descripción detallada del empleo"
+                                                                                                        rows="4"
+                                                                                                        required></textarea>
+                                                                                                    
+                                                                                                </div>
+                                                                                            </div>
+                                                                                        </div>
+                                                                                        
+                                                                                        <br>
+
+                                                                                        <div class="form-group">
+                                                                                            <div class="row">
+                                                                                                <div
+                                                                                                    class="col-md-12 text-center mt-1 mb-4">
+                                                                                                    <button type="reset"
+                                                                                                        id="resetearCreateJob"
+                                                                                                        class="btnEnviar btn-lg mx-3 col-md-5"
+                                                                                                        title="Resetear formulario">
+                                                                                                        <i
+                                                                                                            class="fas fa-redo"></i>
+                                                                                                        Resetear</button>
+                                                                                                    <button
+                                                                                                        type="submit"
+                                                                                                        class="btnEnviar btn-lg mx-3 col-md-5"
+                                                                                                        title="Publicar empleo"><i
+                                                                                                            class="fas fa-plus"></i>
+                                                                                                        Publicar</button>
+                                                                                                </div>
+                                                                                            </div>
+
+                                                                                        </div>
+
+
+                                                                                    </div>
+
+                                                                                </fieldset>
+
+
+                                                                            </form>
+
+
+                                                                            <div id="notificationPostJob"
+                                                                                class="text-center col-md-12">
+
+                                                                            </div>
+                                                                        </div>
+                                                                    </div>
+
+
+
+                                                                </div>
+                                                                <div class="modal-footer">
+
+                                                                    <p class="footer-title text-end fst-italic mt-2 mx-5"
+                                                                        style="font-size: 0.9em;">
+                                                                        Los campos marcados con * son obligatorios.
+                                                                    </p>
+                                                                    
+                                                                </div>
+                                                            </div>
+                                                        </div>
+                                                    </div>
+
+                                                </div>
+                                            </div>
+
+
+
+                                            <div id="sidebar-accordion" class="accordion mt-3"
+                                                style="float: left; margin-right: 20px;">
+
+
+                                                <h4><i id="iconShow" class="fas fa-eye colorAzulOscuro"
+                                                        (click)="showCategorias()" title="Mostrar Categorías"
+                                                        style="cursor: pointer;"></i>
+                                                    <i id="iconHide" class="fas fa-eye-slash colorAzulOscuro"
+                                                        (click)="hideCategorias()"
+                                                        style="display: none; cursor: pointer;"
+                                                        title="Ocultar Categorías"></i>
+                                                    Categorías
+                                                </h4>
+
+
+
+                                                <div class="list-group" id="hideOrShowCategorias"
+                                                    style="display: none;">
+                                                    <a (click)="filtrarXCategoria('')" name="listaEnlacesCategs"
+                                                        id="Todas las Categorías"
+                                                        class="list-group-item list-group-item-action bg-secondary text-light"
+                                                        style="cursor: pointer;" title="Ir a Todas las Categorías">
+                                                        Todas las Categorías
+                                                    </a>
+                                                    <a *ngFor="let categ of listaCategorias" data-toggle="collapse"
+                                                        id="{{categ}}" name="listaEnlacesCategs" aria-expanded="false"
+                                                        (click)="filtrarXCategoria(categ)"
+                                                        class="list-group-item list-group-item-action bg-dark text-light"
+                                                        style="cursor: pointer;" title="Ir a {{categ}}">
+                                                        {{categ}}
+                                                    </a>
+
+                                                </div>
+                                            </div>
+
+
+
+
+                                            <div class="container mt-5 mb-3">
+                                                <div class="row">
+
+                                                    <div *ngFor="let job of listaEmpleos | filter:jobsService.searchText | orderBy: key: reverse | paginate: {id: 'pagination1', itemsPerPage: 9, currentPage: p }"
+                                                        class="col-md-4">
+
+                                                        <div *ngFor="let userData of avatares">
+                                                            <div *ngIf="userData.idJob === job._id">
+                                                                <div class="card p-3 mb-2">
+                                                                    <div class="d-flex justify-content-between">
+                                                                        <div class="d-flex flex-row align-items-center">
+                                                                            <div class="icon">
+                                                                                <img src="{{userData.avatar}}"
+                                                                                    class="card-img-top rounded-circle">
+                                                                            </div>
+                                                                            <div class="ms-2 c-details">
+                                                                                <h6 class="mb-0">
+                                                                                    {{userData.username}}
+                                                                                </h6> <span>{{job.updatedAt |
+                                                                                    date:'mediumDate'}}</span>
+                                                                            </div>
+                                                                        </div>
+                                                                        <!-- <div class="badge">
+                                                                            <span>{{job.categoria}}</span>
+                                                                        </div> -->
+                                                                    </div>
+                                                                    <div class="mt-2 badge">
+                                                                        <span
+                                                                            style="font-family: Arial, Helvetica, sans-serif;">{{job.categoria}}</span>
+                                                                    </div>
+                                                                    <div class="mt-3 text-center">
+                                                                        <h3 class="heading">{{job.title}}</h3>
+
+
+                                                                        <div class="card-text text-center">
+                                                                            <span style="color: rgb(1, 80, 1);"><i
+                                                                                    class="fas fa-money-bill"
+                                                                                    title="Salario"></i>
+                                                                            </span>
+                                                                            <span *ngIf="job.salario === 0"> Sin
+                                                                                especificar</span>
+                                                                            <span *ngIf="job.salario !== 0">
+                                                                                {{job.salario | currency:'EUR'}}</span>
+                                                                            <br>
+                                                                            <span style="color: rgb(1, 80, 1);"><i
+                                                                                    class="far fa-calendar-alt"
+                                                                                    title="Duración"></i> </span>
+                                                                            {{job.duracion}}
+                                                                            <br>
+                                                                            <span style="color: rgb(1, 80, 1);"><i
+                                                                                    class="fas fa-map-marked-alt"
+                                                                                    title="Ubicación"></i>
+                                                                            </span>
+                                                                            {{job.location}}
+                                                                            <hr>
+
+                                                                            <button type="button" id="showJobDetails"
+                                                                                class="btnEnviar px-3 btn-lg text-muted mb-3"
+                                                                                title="Ver detalles del empleo"
+                                                                                data-bs-toggle="modal"
+                                                                                attr.data-bs-target="#showJob-{{job._id}}">
+                                                                                <i class="fas fa-eye"></i>
+                                                                                Detalle</button>
+                                                                            <button type="button" id="prueba"
+                                                                                style="display: none;"></button>
+                                                                        </div>
+
+
+
+                                                                        <div class="modal fade" id="showJob-{{job._id}}"
+                                                                            data-bs-backdrop="static"
+                                                                            data-bs-keyboard="false" tabindex="-1"
+                                                                            aria-labelledby="jobDetailsModalLabel"
+                                                                            aria-hidden="true">
+                                                                            <div class="modal-dialog modal-xl">
+                                                                                <div class="modal-content">
+                                                                                    <div class="modal-header">
+                                                                                        <h5 class="modal-title fs-4"
+                                                                                            id="jobDetailsModalLabel">
+                                                                                            Información del empleo:
+                                                                                            {{job.title |
+                                                                                            uppercase}}
+                                                                                        </h5> <button
+                                                                                            id="closeModalJobDetails-{{job._id}}"
+                                                                                            type="button"
+                                                                                            class="btn-close"
+                                                                                            data-bs-dismiss="modal"
+                                                                                            aria-label="Close"
+                                                                                            title="Cerrar ventana"></button>
+                                                                                    </div>
+                                                                                    <div class="modal-body">
+                                                                                        
+                                                                                        <div class="row">
+                                                                                            <div
+                                                                                                class="col-3 d-flex justify-content-between">
+                                                                                                <div
+                                                                                                    class="d-flex align-items-center text-center">
+                                                                                                    <div
+                                                                                                        class="text-center">
+                                                                                                        <img src="{{userData.avatar}}"
+                                                                                                            class="img-fluid z-depth-1-half rounded-circle">
+                                                                                                        <div
+                                                                                                            style="height: 10px">
+                                                                                                        </div>
+                                                                                                        <p
+                                                                                                            class="title mb-0">
+                                                                                                            <i
+                                                                                                                class="fas fa-at"></i>{{userData.username}}
+                                                                                                        </p>
+                                                                                                       
+                                                                                                    </div>
+                                                                                                </div>
+                                                                                            </div>
+
+
+                                                                                            <div class="col-9">
+                                                                                                <div class="contenedor text-center"
+                                                                                                    style="margin: auto;">
+
+                                                                                                    <div
+                                                                                                        class="row gutters-sm">
+                                                                                                        <div
+                                                                                                            class="col-sm-1">
+                                                                                                        </div>
+                                                                                                        <div
+                                                                                                            class="card mb-3 col-sm-10">
+                                                                                                            <div
+                                                                                                                class="card-body text-center">
+                                                                                                                <h5
+                                                                                                                    class="text-center mb-4">
+                                                                                                                    <i
+                                                                                                                        class="material-icons colorAzulOscuro mr-2 bigicon">
+                                                                                                                        <i class="fas fa-digital-tachograph"
+                                                                                                                            title="Datos del empleo"></i>
+                                                                                                                        Datos
+                                                                                                                        del
+                                                                                                                        empleo</i>
+                                                                                                                </h5>
+                                                                                                                <div
+                                                                                                                    class="row d-none">
+                                                                                                                    <div
+                                                                                                                        class="col-sm-5">
+                                                                                                                        <h6
+                                                                                                                            class="mb-0">
+                                                                                                                            ID
+                                                                                                                            de
+                                                                                                                            empleo
+                                                                                                                        </h6>
+                                                                                                                    </div>
+                                                                                                                    <div id="accountId"
+                                                                                                                        class="col-sm-7 text-secondary">
+                                                                                                                        {{job._id}}
+                                                                                                                    </div>
+                                                                                                                </div>
+                                                                                                                <div
+                                                                                                                    class="row">
+                                                                                                                    <div
+                                                                                                                        class="col-sm-5">
+                                                                                                                        <h6
+                                                                                                                            class="mb-0">
+                                                                                                                            <i class="fas fa-heading colorAzulOscuro"
+                                                                                                                                title="Título"></i>
+                                                                                                                            Título:
+                                                                                                                        </h6>
+                                                                                                                    </div>
+                                                                                                                    <div id="title"
+                                                                                                                        class="col-sm-7 text-secondary">
+                                                                                                                        {{job.title
+                                                                                                                        |
+                                                                                                                        uppercase}}
+                                                                                                                    </div>
+                                                                                                                </div>
+                                                                                                                <hr>
+                                                                                                                <div
+                                                                                                                    class="row">
+                                                                                                                    <div
+                                                                                                                        class="col-sm-5">
+                                                                                                                        <h6
+                                                                                                                            class="mb-0">
+                                                                                                                            <i class="fas fa-briefcase colorAzulOscuro"
+                                                                                                                                title="Autor"></i>
+                                                                                                                            Autor:
+                                                                                                                        </h6>
+                                                                                                                    </div>
+                                                                                                                    <div id="author"
+                                                                                                                        class="col-sm-7 text-secondary">
+                                                                                                                        {{job.author}}
+                                                                                                                    </div>
+                                                                                                                </div>
+                                                                                                                <hr>
+                                                                                                                <div
+                                                                                                                    class="row">
+                                                                                                                    <div
+                                                                                                                        class="col-sm-5">
+                                                                                                                        <h6
+                                                                                                                            class="mb-0">
+                                                                                                                            <i class="fas fa-tag colorAzulOscuro"
+                                                                                                                                title="Categoría"></i>
+                                                                                                                            Categoría:
+                                                                                                                        </h6>
+                                                                                                                    </div>
+                                                                                                                    <div id="categoria"
+                                                                                                                        class="col-sm-7 text-secondary">
+                                                                                                                        {{job.categoria}}
+                                                                                                                    </div>
+                                                                                                                </div>
+                                                                                                                <hr>
+                                                                                                                <div
+                                                                                                                    class="row">
+                                                                                                                    <div
+                                                                                                                        class="col-sm-5">
+                                                                                                                        <h6
+                                                                                                                            class="mb-0">
+                                                                                                                            <i class="fas fa-hand-holding-usd colorAzulOscuro"
+                                                                                                                                title="Salario"></i>
+                                                                                                                            Salario:
+                                                                                                                        </h6>
+                                                                                                                    </div>
+                                                                                                                    <div id="salario"
+                                                                                                                        class="col-sm-7 text-secondary">
+                                                                                                                        {{job.salario
+                                                                                                                        |
+                                                                                                                        currency:'EUR'}}
+                                                                                                                    </div>
+                                                                                                                </div>
+                                                                                                                <hr>
+                                                                                                                <div
+                                                                                                                    class="row">
+                                                                                                                    <div
+                                                                                                                        class="col-sm-5">
+                                                                                                                        <h6
+                                                                                                                            class="mb-0">
+                                                                                                                            <i class="far fa-calendar-alt colorAzulOscuro"
+                                                                                                                                title="Duración"></i>
+                                                                                                                            Duración:
+                                                                                                                        </h6>
+                                                                                                                    </div>
+                                                                                                                    <div id="duracion"
+                                                                                                                        class="col-sm-7 text-secondary">
+                                                                                                                        {{job.duracion}}
+                                                                                                                    </div>
+                                                                                                                </div>
+                                                                                                                <hr>
+                                                                                                                <div
+                                                                                                                    class="row">
+                                                                                                                    <div
+                                                                                                                        class="col-sm-5">
+                                                                                                                        <h6
+                                                                                                                            class="mb-0">
+                                                                                                                            <i class="fas fa-clock colorAzulOscuro"
+                                                                                                                                title="Horas"></i>
+                                                                                                                            Horas:
+                                                                                                                        </h6>
+                                                                                                                    </div>
+                                                                                                                    <div id="horas"
+                                                                                                                        class="col-sm-7 text-secondary">
+                                                                                                                        <span
+                                                                                                                            *ngIf="job.horas === 0">
+                                                                                                                            Sin
+                                                                                                                            especificar</span>
+                                                                                                                        <span
+                                                                                                                            *ngIf="job.horas !== 0">
+                                                                                                                            {{job.horas}}
+                                                                                                                            H
+                                                                                                                            /
+                                                                                                                            SEMANA</span>
+
+
+                                                                                                                    </div>
+                                                                                                                </div>
+                                                                                                                <hr>
+                                                                                                                <div
+                                                                                                                    class="row">
+                                                                                                                    <div
+                                                                                                                        class="col-sm-5">
+                                                                                                                        <h6
+                                                                                                                            class="mb-0">
+                                                                                                                            <i class="fas fa-info-circle colorAzulOscuro"
+                                                                                                                                title="Descripción"></i>
+                                                                                                                            Descripción:
+                                                                                                                        </h6>
+                                                                                                                    </div>
+                                                                                                                    <div id="description"
+                                                                                                                        class="col-sm-7 text-secondary">
+                                                                                                                        {{job.description}}
+                                                                                                                    </div>
+                                                                                                                </div>
+                                                                                                            </div>
+                                                                                                        </div>
+                                                                                                        <div
+                                                                                                            class="col-sm-1">
+                                                                                                        </div>
+                                                                                                    </div>
+                                                                                                </div>
+                                                                                            </div>
+                                                                                        </div>
+
+
+
+
+
+                                                                                        <div id="notificationJobDetails-{{job._id}}"
+                                                                                            class="text-center col-md-12">
+
+                                                                                        </div>
+
+                                                                                    </div>
+                                                                                    <div class="modal-footer">
+
+                                                                                        <div
+                                                                                            *ngIf="(profilesService.updatedUser.accountType === 'company' && profilesService.updatedUser.username === job.author) || profilesService.updatedUser.accountType === 'admin'">
+                                                                                            <button type="button"
+                                                                                                id="deleteJob-{{job._id}}"
+                                                                                                class="btnEnviar btn-danger col-md-12 btn-lg"
+                                                                                                title="Eliminar empleo"
+                                                                                                (click)="deleteJob(job)">
+                                                                                                <i
+                                                                                                    class="fas fa-trash-alt"></i>
+                                                                                                Eliminar
+                                                                                            </button>
+
+
+
+                                                                                        </div>
+
+                                                                                        <div
+                                                                                            *ngIf="(profilesService.updatedUser.accountType === 'company' && profilesService.updatedUser.username === job.author) || profilesService.updatedUser.accountType === 'admin'">
+                                                                                            <button type="button"
+                                                                                                id="incribedJobs-{{job._id}}"
+                                                                                                class="btnEnviar col-md-12 btn-lg"
+                                                                                                title="Ver inscritos"
+                                                                                                (click)="getAllInscribed(job)">
+                                                                                                <i
+                                                                                                    class="fas fa-eye"></i>
+                                                                                                Ver inscritos
+                                                                                            </button>
+                                                                                        </div>
+
+                                                                                        <div
+                                                                                            *ngIf="profilesService.updatedUser.username !== job.author">
+                                                                                            <button type="button"
+                                                                                                id="jobInscribeBtn2-{{job._id}}"
+                                                                                                class="btnEnviar col-md-12 btn-lg"
+                                                                                                title="Inscribirse al empleo"
+                                                                                                (click)="inscribeJob(job)">
+                                                                                                <i id="iconInscribedJob2-{{job._id}}"
+                                                                                                    class="fas fa-user-plus"></i>
+                                                                                                {{checkInscribedJob(job._id)}}
+                                                                                                {{inscribedJobText}}
+                                                                                            </button>
+                                                                                        </div>
+
+
+
+
+                                                                                        <p class="footer-title">
+                                                                                            Creado: <span
+                                                                                                class="text-muted">{{job.createdAt
+                                                                                                |
+                                                                                                date:'mediumDate'}}</span>
+                                                                                            <br>
+                                                                                            Actualizado: <span
+                                                                                                class="text-muted">{{job.updatedAt
+                                                                                                |
+                                                                                                date:'mediumDate'}}</span>
+
+                                                                                        </p>
+
+                                                                                    </div>
+                                                                                </div>
+                                                                            </div>
+                                                                        </div>
+
+                                                                        <div class="card-footer">
+                                                                            <div class="row">
+                                                                                <div
+                                                                                    *ngIf="(profilesService.updatedUser.accountType === 'company' && profilesService.updatedUser.username === job.author) || profilesService.updatedUser.accountType === 'admin'">
+
+
+                                                                                    <button type="button"
+                                                                                        class="btnEnviar px-2 col-md-12 btn-lg"
+                                                                                        title="Editar el empleo"
+                                                                                        data-bs-toggle="modal"
+                                                                                        attr.data-bs-target="#editJob-{{job._id}}">
+                                                                                        <i class="fas fa-edit"></i>
+                                                                                        Editar
+                                                                                    </button>
+
+
+
+                                                                                    <div class="modal fade"
+                                                                                        id="editJob-{{job._id}}"
+                                                                                        tabindex="-1"
+                                                                                        data-bs-backdrop="static"
+                                                                                        data-bs-keyboard="false"
+                                                                                        aria-labelledby="editJobModalLabel"
+                                                                                        aria-hidden="true">
+                                                                                        <div
+                                                                                            class="modal-dialog modal-xl">
+                                                                                            <div class="modal-content">
+                                                                                                <div
+                                                                                                    class="modal-header">
+                                                                                                    <h5 class="modal-title fs-4"
+                                                                                                        id="editJobModalLabel">
+                                                                                                        Editar empleo:
+                                                                                                        {{job.title}}
+                                                                                                    </h5>
+                                                                                                    <button
+                                                                                                        id="closeModalEditJob"
+                                                                                                        type="button"
+                                                                                                        class="btn-close"
+                                                                                                        (click)="loadDataJobs()"
+                                                                                                        data-bs-dismiss="modal"
+                                                                                                        aria-label="Close"
+                                                                                                        title="Cerrar ventana"></button>
+                                                                                                </div>
+                                                                                                <div class="modal-body">
+
+                                                                                                    <div class="row">
+                                                                                                        <div
+                                                                                                            class="col-3 d-flex justify-content-between">
+                                                                                                            <div
+                                                                                                                class="d-flex align-items-center text-center">
+                                                                                                                <div
+                                                                                                                    class="text-center">
+                                                                                                                    <img *ngIf="profilesService.profile as perfil"
+                                                                                                                        src="{{userData.avatar}}"
+                                                                                                                        class="img-fluid z-depth-1-half rounded-circle">
+                                                                                                                    <div
+                                                                                                                        style="height: 10px">
+                                                                                                                    </div>
+                                                                                                                    <p
+                                                                                                                        class="title mb-0">
+                                                                                                                        <i
+                                                                                                                            class="fas fa-at"></i>{{job.author}}
+                                                                                                                    </p>
+                                                                                                                   
+                                                                                                                </div>
+                                                                                                            </div>
+                                                                                                        </div>
+
+
+                                                                                                        <div
+                                                                                                            class="col-9">
+                                                                                                            <div class="contenedor text-center"
+                                                                                                                style="margin: auto;">
+
+                                                                                                                <form
+                                                                                                                    id="updateJobForm"
+                                                                                                                    #updateJobForm="ngForm"
+                                                                                                                    #jobForm="ngForm"
+                                                                                                                    (ngSubmit)="editJob(updateJobForm)"
+                                                                                                                    ngNativeValidate
+                                                                                                                    class="form-horizontal text-center border"
+                                                                                                                    method="post">
+                                                                                                                    <fieldset>
+
+                                                                                                                        <legend>
+                                                                                                                            Editar
+                                                                                                                            empleo:
+                                                                                                                        </legend>
+
+                                                                                                                        <div
+                                                                                                                            class="container col-md-12">
+                                                                                                                            <div
+                                                                                                                                class="form-group">
+                                                                                                                                <div
+                                                                                                                                    class="row">
+
+                                                                                                                                    <div
+                                                                                                                                        class="col-md-5 m-auto mt-3 d-none">
+                                                                                                                                        <label
+                                                                                                                                            for="_id">
+                                                                                                                                            <span
+                                                                                                                                                class="col-md-1 col-md-offset-2 text-center">*
+                                                                                                                                                <i class="fas fa-fingerprint bigicon"
+                                                                                                                                                    title="ID de empleo"></i>
+                                                                                                                                                ID
+                                                                                                                                                de
+                                                                                                                                                empleo:</span>
+                                                                                                                                        </label>
+                                                                                                                                        <input
+                                                                                                                                            [(ngModel)]="job._id"
+                                                                                                                                            id="_id"
+                                                                                                                                            name="_id"
+                                                                                                                                            type="text"
+                                                                                                                                            placeholder="ID de empleo"
+                                                                                                                                            class="form-control text-center"
+                                                                                                                                            [readonly]=true
+                                                                                                                                            required>
+                                                                                                                                    </div>
+
+                                                                                                                                    <div
+                                                                                                                                        class="col-md-5 m-auto mt-3">
+                                                                                                                                        <label
+                                                                                                                                            for="updatedJobtitle-{{job._id}}">
+                                                                                                                                            <span
+                                                                                                                                                class="col-md-1 col-md-offset-2 text-center">*
+                                                                                                                                                <i class="fas fa-heading bigicon"
+                                                                                                                                                    title="Título"></i>
+                                                                                                                                                Título:</span>
+
+                                                                                                                                        </label>
+
+                                                                                                                                        <input
+                                                                                                                                            [(ngModel)]="job.title"
+                                                                                                                                            id="updatedJobtitle-{{job._id}}"
+                                                                                                                                            name="title"
+                                                                                                                                            type="text"
+                                                                                                                                            maxlength="20"
+                                                                                                                                            pattern="[a-zA-ZáéíóúÁÉÍÓÚñÑ ]{2,20}"
+                                                                                                                                            title="Título debe ser solamente texto con espacios, mínimo de 2 carácteres y no superior a 20 carácteres"
+                                                                                                                                            placeholder="Título"
+                                                                                                                                            class="form-control text-center"
+                                                                                                                                            required>
+                                                                                                                                    </div>
+                                                                                                                                    <div
+                                                                                                                                        class="col-md-5 m-auto mt-3">
+                                                                                                                                        <label
+                                                                                                                                            for="updatedJobauthor-{{job._id}}">
+                                                                                                                                            <span
+                                                                                                                                                class="col-md-1 col-md-offset-2 text-center">*
+                                                                                                                                                <i class="fas fa-briefcase bigicon"
+                                                                                                                                                    title="Autor"></i>
+                                                                                                                                                Autor:</span>
+                                                                                                                                        </label>
+                                                                                                                                        <input
+                                                                                                                                            [(ngModel)]="job.author"
+                                                                                                                                            id="updatedJobauthor-{{job._id}}"
+                                                                                                                                            name="author"
+                                                                                                                                            type="text"
+                                                                                                                                            placeholder="Autor"
+                                                                                                                                            class="form-control text-center"
+                                                                                                                                            style="cursor: no-drop;"
+                                                                                                                                            [readonly]=true
+                                                                                                                                            required>
+                                                                                                                                    </div>
+                                                                                                                                </div>
+                                                                                                                            </div>
+                                                                                                                            <div
+                                                                                                                                class="form-group">
+                                                                                                                                <div
+                                                                                                                                    class="row">
+                                                                                                                                    <div
+                                                                                                                                        class="col-md-5 m-auto mt-3">
+                                                                                                                                        <label
+                                                                                                                                            for="updatedJoblocation-{{job._id}}">
+                                                                                                                                            <span
+                                                                                                                                                class="col-md-1 col-md-offset-2 text-center">
+                                                                                                                                                <i class="fas fa-map-marked-alt bigicon"
+                                                                                                                                                    title="Ubicación"></i>
+                                                                                                                                                Ubicación:</span>
+                                                                                                                                        </label>
+
+
+
+                                                                                                                                        <select
+                                                                                                                                            [(ngModel)]="job.location"
+                                                                                                                                            id="updatedJoblocation-{{job._id}}"
+                                                                                                                                            name=location
+                                                                                                                                            class="form-select text-center"
+                                                                                                                                            required>
+                                                                                                                                            <option
+                                                                                                                                                value="Sin ubicación"
+                                                                                                                                                selected>
+                                                                                                                                                Sin
+                                                                                                                                                ubicación
+                                                                                                                                            </option>
+                                                                                                                                            <option
+                                                                                                                                                value="Andalucía">
+                                                                                                                                                Andalucía
+                                                                                                                                            </option>
+                                                                                                                                            <option
+                                                                                                                                                value="Aragón">
+                                                                                                                                                Aragón
+                                                                                                                                            </option>
+                                                                                                                                            <option
+                                                                                                                                                value="Asturias">
+                                                                                                                                                Asturias
+                                                                                                                                            </option>
+                                                                                                                                            <option
+                                                                                                                                                value="Baleares">
+                                                                                                                                                Baleares
+                                                                                                                                            </option>
+                                                                                                                                            <option
+                                                                                                                                                value="Ceuta">
+                                                                                                                                                Ceuta
+                                                                                                                                            </option>
+                                                                                                                                            <option
+                                                                                                                                                value="Canarias">
+                                                                                                                                                Canarias
+                                                                                                                                            </option>
+                                                                                                                                            <option
+                                                                                                                                                value="Cantabria">
+                                                                                                                                                Cantabria
+                                                                                                                                            </option>
+                                                                                                                                            <option
+                                                                                                                                                value="Castilla-La Mancha">
+                                                                                                                                                Castilla-La
+                                                                                                                                                Mancha
+                                                                                                                                            </option>
+                                                                                                                                            <option
+                                                                                                                                                value="Castilla y Leon">
+                                                                                                                                                Castilla
+                                                                                                                                                y
+                                                                                                                                                Leon
+                                                                                                                                            </option>
+                                                                                                                                            <option
+                                                                                                                                                value="Catalunya">
+                                                                                                                                                Catalunya
+                                                                                                                                            </option>
+                                                                                                                                            <option
+                                                                                                                                                value="Comunidad Valenciana">
+                                                                                                                                                Comunidad
+                                                                                                                                                Valenciana
+                                                                                                                                            </option>
+                                                                                                                                            <option
+                                                                                                                                                value="Extremadura">
+                                                                                                                                                Extremadura
+                                                                                                                                            </option>
+                                                                                                                                            <option
+                                                                                                                                                value="Galicia">
+                                                                                                                                                Galicia
+                                                                                                                                            </option>
+                                                                                                                                            <option
+                                                                                                                                                value="La Rioja">
+                                                                                                                                                La
+                                                                                                                                                Rioja
+                                                                                                                                            </option>
+                                                                                                                                            <option
+                                                                                                                                                value="Madrid">
+                                                                                                                                                Madrid
+                                                                                                                                            </option>
+                                                                                                                                            <option
+                                                                                                                                                value="Melilla">
+                                                                                                                                                Melilla
+                                                                                                                                            </option>
+                                                                                                                                            <option
+                                                                                                                                                value="Murcia">
+                                                                                                                                                Murcia
+                                                                                                                                            </option>
+                                                                                                                                            <option
+                                                                                                                                                value="Navarra">
+                                                                                                                                                Navarra
+                                                                                                                                            </option>
+                                                                                                                                            <option
+                                                                                                                                                value="Pais Vasco">
+                                                                                                                                                Pais
+                                                                                                                                                Vasco
+                                                                                                                                            </option>
+                                                                                                                                        </select>
+
+                                                                                                                                    </div>
+                                                                                                                                    <div
+                                                                                                                                        class="col-md-5 m-auto mt-3">
+                                                                                                                                        <label
+                                                                                                                                            for="updatedJobcategoria-{{job._id}}">
+                                                                                                                                            <span
+                                                                                                                                                class="col-md-1 col-md-offset-2 text-center">
+                                                                                                                                                <i class="fas fa-tag bigicon"
+                                                                                                                                                    title="Categoría"></i>
+                                                                                                                                                Categoría:</span>
+                                                                                                                                        </label>
+
+                                                                                                                                        <select
+                                                                                                                                            [(ngModel)]="job.categoria"
+                                                                                                                                            id="updatedJobcategoria-{{job._id}}"
+                                                                                                                                            name=categoria
+                                                                                                                                            class="form-select text-center"
+                                                                                                                                            required>
+                                                                                                                                            <option
+                                                                                                                                                value="Sin categoría"
+                                                                                                                                                selected>
+                                                                                                                                                Sin
+                                                                                                                                                categoría
+                                                                                                                                            </option>
+                                                                                                                                            <option
+                                                                                                                                                *ngFor="let categ of listaCategorias"
+                                                                                                                                                [value]="categ">
+                                                                                                                                                {{categ}}
+                                                                                                                                            </option>
+                                                                                                                                            <option
+                                                                                                                                                value="Indefinido">
+                                                                                                                                                Indefinido
+                                                                                                                                            </option>
+                                                                                                                                            <option
+                                                                                                                                                value="Temporal">
+                                                                                                                                                Temporal
+                                                                                                                                            </option>
+                                                                                                                                            <option
+                                                                                                                                                value="Freelance">
+                                                                                                                                                Freelance
+                                                                                                                                            </option>
+                                                                                                                                        </select>
+                                                                                                                                    </div>
+                                                                                                                                </div>
+                                                                                                                            </div>
+                                                                                                                            <div
+                                                                                                                                class="form-group">
+                                                                                                                                <div
+                                                                                                                                    class="row">
+                                                                                                                                    <div
+                                                                                                                                        class="col-md-5 m-auto mt-3">
+                                                                                                                                        <label
+                                                                                                                                            for="updatedJobsalario-{{job._id}}">
+                                                                                                                                            <span
+                                                                                                                                                class="col-md-1 col-md-offset-2 text-center">
+                                                                                                                                                <i class="fas fa-hand-holding-usd bigicon"
+                                                                                                                                                    title="Salario"></i>
+                                                                                                                                                Salario:</span>
+
+                                                                                                                                        </label>
+
+                                                                                                                                        <input
+                                                                                                                                            [(ngModel)]="job.salario"
+                                                                                                                                            id="updatedJobsalario-{{job._id}}"
+                                                                                                                                            name="salario"
+                                                                                                                                            pattern="[0-4][0-9][0-9][0-9][0-9][0-9]|500000"
+                                                                                                                                            title="Salario debe ser un número entre 0 y 500000"
+                                                                                                                                            type="number"
+                                                                                                                                            placeholder="Salario"
+                                                                                                                                            class="form-control text-center"
+                                                                                                                                            required>
+                                                                                                                                    </div>
+                                                                                                                                    <div
+                                                                                                                                        class="col-md-5 m-auto mt-3">
+                                                                                                                                        <label
+                                                                                                                                            for="updatedJobhoras-{{job._id}}">
+                                                                                                                                            <span
+                                                                                                                                                class="col-md-1 col-md-offset-2 text-center"><i
+                                                                                                                                                    class="fas fa-clock bigicon"
+                                                                                                                                                    title="Horas / semana"></i>
+                                                                                                                                                Horas
+                                                                                                                                                /
+                                                                                                                                                semana:</span>
+                                                                                                                                        </label>
+                                                                                                                                        <input
+                                                                                                                                            [(ngModel)]="job.horas"
+                                                                                                                                            id="updatedJobhoras-{{job._id}}"
+                                                                                                                                            name="horas"
+                                                                                                                                            pattern="[0-3][0-9]|40"
+                                                                                                                                            title="Horas debe ser un número entre 0 y 40"
+                                                                                                                                            type="number"
+                                                                                                                                            placeholder="Horas / semana"
+                                                                                                                                            class="form-control text-center"
+                                                                                                                                            required>
+                                                                                                                                    </div>
+                                                                                                                                </div>
+                                                                                                                            </div>
+                                                                                                                            <div
+                                                                                                                                class="form-group">
+                                                                                                                                <div
+                                                                                                                                    class="row">
+                                                                                                                                    <div
+                                                                                                                                        class="col-md-11 m-auto mt-3">
+                                                                                                                                        <label
+                                                                                                                                            for="updatedJobduracion-{{job._id}}">
+                                                                                                                                            <span
+                                                                                                                                                class="col-md-1 col-md-offset-2 text-center"><i
+                                                                                                                                                    class="far fa-calendar-alt bigicon"
+                                                                                                                                                    title="Duración"></i>
+                                                                                                                                                Duración:</span>
+                                                                                                                                        </label>
+
+                                                                                                                                        <select
+                                                                                                                                            [(ngModel)]="job.duracion"
+                                                                                                                                            id="updatedJobduracion-{{job._id}}"
+                                                                                                                                            name=duracion
+                                                                                                                                            class="form-select text-center"
+                                                                                                                                            required>
+                                                                                                                                            <option
+                                                                                                                                                value="Sin duración"
+                                                                                                                                                selected>
+                                                                                                                                                Sin
+                                                                                                                                                duración
+                                                                                                                                            </option>
+                                                                                                                                            <option
+                                                                                                                                                value="Indefinido">
+                                                                                                                                                Indefinido
+                                                                                                                                            </option>
+                                                                                                                                            <option
+                                                                                                                                                value="Parcial">
+                                                                                                                                                Parcial
+                                                                                                                                            </option>
+                                                                                                                                            <option
+                                                                                                                                                value="Días sueltos">
+                                                                                                                                                Días
+                                                                                                                                                sueltos
+                                                                                                                                            </option>
+                                                                                                                                            <option
+                                                                                                                                                value="Freelance">
+                                                                                                                                                Freelance
+                                                                                                                                            </option>
+                                                                                                                                        </select>
+                                                                                                                                    </div>
+                                                                                                                                </div>
+                                                                                                                            </div>
+                                                                                                                            <div
+                                                                                                                                class="form-group">
+                                                                                                                                <div
+                                                                                                                                    class="row">
+
+                                                                                                                                    <div
+                                                                                                                                        class="col-md-12 m-auto mt-3">
+                                                                                                                                        <label
+                                                                                                                                            for="updatedJobdescription-{{job._id}}">
+                                                                                                                                            <span
+                                                                                                                                                class="col-md-1 col-md-offset-2 text-center">
+                                                                                                                                                *
+                                                                                                                                                <i class="fas fa-info-circle bigicon"
+                                                                                                                                                    title="Descripción"></i>
+                                                                                                                                                Descripción:</span>
+                                                                                                                                        </label>
+
+                                                                                                                                        <textarea
+                                                                                                                                            [(ngModel)]="job.description"
+                                                                                                                                            class="form-control text-center"
+                                                                                                                                            id="updatedJobdescription-{{job._id}}"
+                                                                                                                                            name="description"
+                                                                                                                                            placeholder="Indique una descripción detallada del empleo"
+                                                                                                                                            rows="4"
+                                                                                                                                            required></textarea>
+                                                                                                                                    </div>
+                                                                                                                                </div>
+                                                                                                                            </div>
+                                                                                                                            <br>
+                                                                                                                            <div
+                                                                                                                                class="form-group">
+                                                                                                                                <div
+                                                                                                                                    class="row">
+                                                                                                                                    <div
+                                                                                                                                        class="col-md-12 text-center mt-1 mb-4">
+
+                                                                                                                                        <button
+                                                                                                                                            type="submit"
+                                                                                                                                            class="btnEnviar btn-lg col-md-9"
+                                                                                                                                            title="Editar el empleo"><i
+                                                                                                                                                class="fas fa-edit"></i>
+                                                                                                                                            Editar</button>
+                                                                                                                                    </div>
+                                                                                                                                </div>
+
+                                                                                                                            </div>
+
+
+                                                                                                                        </div>
+
+                                                                                                                    </fieldset>
+
+
+                                                                                                                </form>
+
+
+                                                                                                                <div id="notificationEditJob-{{job._id}}"
+                                                                                                                    class="text-center col-md-12">
+
+                                                                                                                </div>
+                                                                                                            </div>
+                                                                                                        </div>
+
+
+
+                                                                                                    </div>
+                                                                                                    <div
+                                                                                                        class="modal-footer">
+
+                                                                                                        <p class="footer-title text-end fst-italic mt-2 mx-5"
+                                                                                                            style="font-size: 0.9em;">
+                                                                                                            Los campos
+                                                                                                            marcados con
+                                                                                                            * son
+                                                                                                            obligatorios.
+                                                                                                        </p>
+                                                                                                      
+                                                                                                    </div>
+                                                                                                </div>
+                                                                                            </div>
+                                                                                        </div>
+
+                                                                                    </div>
+                                                                                </div>
+                                                                                <div
+                                                                                    *ngIf="profilesService.updatedUser.username !== job.author">
+                                                                                    <button type="button"
+                                                                                        id="jobInscribeBtn-{{job._id}}"
+                                                                                        class="btnEnviar col-md-12 btn-lg"
+                                                                                        title="Inscribirse al empleo"
+                                                                                        (click)="inscribeJob(job)">
+                                                                                        <i id="iconInscribedJob-{{job._id}}"
+                                                                                            class="fas fa-user-plus"></i>
+                                                                                        {{checkInscribedJob(job._id)}}
+                                                                                        {{inscribedJobText}}
+                                                                                    </button>
+                                                                                </div>
+
+                                                                            </div>
+
+                                                                        </div>
+
+                                                                        <!-- <div class="mt-5">
+                                                                            <div class="progress">
+                                                                                <div class="progress-bar" role="progressbar" style="width: 50%"
+                                                                                    aria-valuenow="50" aria-valuemin="0" aria-valuemax="100"></div>
+                                                                            </div>
+                                                                            <div class="mt-3"> <span class="text1">32 Applied <span class="text2">of
+                                                                                        50 capacity</span></span> </div>
+                                                                        </div> -->
+                                                                    </div>
+                                                                </div>
+                                                            </div>
+
+                                                        </div>
+                                                        <div
+                                                            *ngIf="listaEmpleos == undefined || listaEmpleos.length == 0">
+                                                            <span><b>NO HAY EMPLEOS</b></span>
+                                                        </div>
+
+                                                    </div>
+                                                    <div class="paginacion mt-5">
+                                                        <pagination-controls id="pagination1" (pageChange)="p = $event"
+                                                            responsive:boolean="true" previousLabel="Anterior"
+                                                            nextLabel="Siguiente">
+                                                        </pagination-controls>
+                                                    </div>
+                                                </div>
+                                            </div>
+
+
+
+
+
+
+                                        </div>
+                                    </div>
+                                </div>
+                            </div>
+                            <!-- </section> -->
+
+
+                            <!-- </div> -->
+
+
+                            <div id="centrado" class="centrado">
+                                <div id="notification">
+
+                                </div>
+                            </div>
+
+                            <!-- </div> -->
+                            <!-- </div> -->
+                            <!-- </div> -->
+                            <!-- </div> -->
+                            <!-- </section> -->
